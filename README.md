@@ -25,11 +25,11 @@ This repo powers [philjohnstonii.com](https://philjohnstonii.com)'s LLM layer:
 
 | Endpoint | Description |
 |---|---|
-| [`/api/profile.json`](https://eusef.github.io/phils-personal-llms/api/profile.json) | Bio, roles, location, contact |
-| [`/api/resume.json`](https://eusef.github.io/phils-personal-llms/api/resume.json) | Career timeline, skills, differentiators |
-| [`/api/blog.json`](https://eusef.github.io/phils-personal-llms/api/blog.json) | All blog posts with excerpts and full content |
-| [`/llms.txt`](https://eusef.github.io/phils-personal-llms/llms.txt) | Standard llms.txt with full inline profile |
-| [`/llms-full.txt`](https://eusef.github.io/phils-personal-llms/llms-full.txt) | Extended profile for direct LLM consumption |
+| [`/api/profile.json`](https://eusef.github.io/auto-llms-txt/api/profile.json) | Bio, roles, location, contact |
+| [`/api/resume.json`](https://eusef.github.io/auto-llms-txt/api/resume.json) | Career timeline, skills, differentiators |
+| [`/api/blog.json`](https://eusef.github.io/auto-llms-txt/api/blog.json) | All blog posts with excerpts and full content |
+| [`/llms.txt`](https://eusef.github.io/auto-llms-txt/llms.txt) | Standard llms.txt with full inline profile |
+| [`/llms-full.txt`](https://eusef.github.io/auto-llms-txt/llms-full.txt) | Extended profile for direct LLM consumption |
 
 ## Project Structure
 

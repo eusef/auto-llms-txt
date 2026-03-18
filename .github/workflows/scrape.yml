@@ -36,10 +36,10 @@ jobs:
       - name: Check for changes
         id: changes
         run: |
-          if git diff --quiet data/; then
-            echo "has_changes=false" >> $GITHUB_OUTPUT
-          else
+          if git status --porcelain data/ | grep -q .; then
             echo "has_changes=true" >> $GITHUB_OUTPUT
+          else
+            echo "has_changes=false" >> $GITHUB_OUTPUT
           fi
 
       - name: Configure git
@@ -74,8 +74,7 @@ jobs:
 
       - name: Build Pages site
         run: |
-          mkdir -p _site/api
-          cp data/*.json _site/api/
+          mkdir -p _site
           cp data/llms.txt _site/llms.txt
           cp data/llms-full.txt _site/llms-full.txt
           cp docs/index.html _site/index.html

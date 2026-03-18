@@ -1,0 +1,14 @@
+{
+  "website_url": "https://philjohnstonii.com",
+  "site_name": "Phil Johnston",
+  "description": "Developer Relations professional, photographer, and builder",
+  "exclude_patterns": [
+    "/llms",
+    "/cdn-cgi",
+    "?format=json",
+    "/cart",
+    "/checkout",
+    "/search",
+    "/.well-known"
+  ]
+}

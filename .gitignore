@@ -15,8 +15,6 @@ env/
 dist/
 build/
 *.egg
-data/
-
 # macOS
 .DS_Store
 *.DS_Store

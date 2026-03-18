@@ -1,141 +1,183 @@
-# LLM-Discoverable Personal API
+# auto-llms-txt
 
-Make any personal website machine-readable for LLMs and AI agents. No servers to run, no accounts beyond GitHub, no manual updates after initial setup.
-
-A daily GitHub Action scrapes your website, outputs structured JSON, and deploys everything to GitHub Pages. Your website 301-redirects `/llms.txt` to the GitHub Pages version, so content stays in sync automatically. Works with Squarespace, WordPress, Wix, Hugo, Jekyll, or any site you can scrape.
+Make any personal website machine-readable for LLMs and AI agents. A daily GitHub Action traverses your sitemap, scrapes each page, and publishes a `llms.txt` + a human-friendly landing page to GitHub Pages. Zero maintenance after setup.
 
 ## How It Works
 
 ```
-yoursite.com/llms.txt (301 redirect from your host)
-  -> yourusername.github.io/your-repo/llms.txt (auto-updated daily)
-     -> yourusername.github.io/your-repo/api/profile.json
-     -> yourusername.github.io/your-repo/api/resume.json
-     -> yourusername.github.io/your-repo/api/blog.json
+yoursite.com/llms.txt  (301 redirect from your host)
+  -> yourusername.github.io/auto-llms-txt/llms.txt  (rebuilt daily)
 ```
 
-1. A GitHub Action scrapes your website daily at 6 AM UTC
-2. Structured JSON is committed to `data/` (only if content changed)
-3. GitHub Pages serves those files as a public, zero-auth API
-4. `llms.txt` on your domain 301-redirects to the GitHub Pages version
+1. GitHub Actions runs at 6 AM UTC, fetches your sitemap, and scrapes each page
+2. `llms.txt` and `llms-full.txt` are committed to `data/` (only if content changed)
+3. A landing page + both text files deploy to GitHub Pages
+4. Your site's `/llms.txt` 301-redirects to GitHub Pages so it stays current automatically
 
 ## Live Example
 
 This repo powers [philjohnstonii.com](https://philjohnstonii.com)'s LLM layer:
 
-| Endpoint | Description |
+| File | Description |
 |---|---|
-| [`/api/profile.json`](https://eusef.github.io/auto-llms-txt/api/profile.json) | Bio, roles, location, contact |
-| [`/api/resume.json`](https://eusef.github.io/auto-llms-txt/api/resume.json) | Career timeline, skills, differentiators |
-| [`/api/blog.json`](https://eusef.github.io/auto-llms-txt/api/blog.json) | All blog posts with excerpts and full content |
-| [`/llms.txt`](https://eusef.github.io/auto-llms-txt/llms.txt) | Standard llms.txt with full inline profile |
-| [`/llms-full.txt`](https://eusef.github.io/auto-llms-txt/llms-full.txt) | Extended profile for direct LLM consumption |
+| [`/llms.txt`](https://eusef.github.io/auto-llms-txt/llms.txt) | Concise page index — titles, URLs, descriptions |
+| [`/llms-full.txt`](https://eusef.github.io/auto-llms-txt/llms-full.txt) | Full content of every page |
+| [`/`](https://eusef.github.io/auto-llms-txt/) | Human-friendly landing page |
 
 ## Project Structure
 
 ```
 your-repo/
-├── data/                        # Scraped JSON (auto-updated by GitHub Action)
-│   ├── profile.json
-│   ├── resume.json
-│   └── blog.json
+├── config.json                  # Your site URL and metadata — edit this
 ├── scraper/
-│   ├── scrape.py                # Python scraper (customize for your site)
+│   ├── scrape.py                # Sitemap-driven scraper (no customization needed)
 │   └── requirements.txt
 ├── docs/
-│   └── index.html               # GitHub Pages landing page
-├── .github/workflows/
-│   └── scrape.yml               # Daily scrape + Pages deployment
-├── llms.txt                     # Standard llms.txt (deployed to Pages)
-├── llms-full.txt                # Extended version with full content
-└── PLAYBOOK.md                  # Step-by-step guide for your own site
+│   └── index.html               # Landing page (auto-populated from llms.txt)
+├── data/                        # Generated output (committed by the workflow)
+│   ├── llms.txt
+│   └── llms-full.txt
+└── .github/workflows/
+    └── scrape.yml               # Daily scrape + GitHub Pages deployment
 ```
 
 ## Deploy Your Own
 
-See [PLAYBOOK.md](PLAYBOOK.md) for the full walkthrough.
+### 1. Fork this repo
 
-Quick version:
+Fork on GitHub. You can rename it to anything.
 
-1. Fork this repo
-2. Update `scraper/scrape.py` for your site's URL and page structure
-3. Enable GitHub Pages (Settings > Pages > Source: GitHub Actions)
-4. Run the workflow (Actions > "Scrape Website & Deploy" > Run workflow)
-5. Add 301 redirects on your website (see platform instructions below)
-6. Verify at `https://<you>.github.io/<repo>/api/profile.json`
+### 2. Edit `config.json`
 
-### Setting Up Redirects by Platform
+```json
+{
+  "website_url": "https://yoursite.com",
+  "site_name": "Your Name",
+  "description": "One-line description of you and what you do",
+  "exclude_patterns": [
+    "/llms",
+    "/cdn-cgi",
+    "/cart",
+    "/checkout",
+    "/search"
+  ]
+}
+```
 
-The key step is making `yoursite.com/llms.txt` redirect to the GitHub Pages version. LLM crawlers don't execute JavaScript, so server-side (301) redirects are required.
+That's the only file you need to edit. The scraper discovers all pages via your sitemap automatically.
+
+### 3. Enable GitHub Pages
+
+Settings > Pages > Source: **GitHub Actions**
+
+### 4. Run the workflow
+
+Actions > "Scrape Website & Deploy" > Run workflow
+
+After it completes, your files will be live at:
+```
+https://<you>.github.io/<repo>/llms.txt
+https://<you>.github.io/<repo>/llms-full.txt
+https://<you>.github.io/<repo>/
+```
+
+### 5. Add redirects on your website
+
+Make `yoursite.com/llms.txt` point to the GitHub Pages version. LLMs don't execute JavaScript, so these must be server-side 301 redirects.
 
 **Squarespace**
-Settings > Advanced > URL Mappings (or Settings > Developer Tools > URL Mappings), then add:
+
+Settings > Advanced > URL Mappings:
 ```
 /llms.txt -> https://<you>.github.io/<repo>/llms.txt 301
 /llms-full.txt -> https://<you>.github.io/<repo>/llms-full.txt 301
 ```
 
-**WordPress**
-Add to your theme's `functions.php` or use a redirect plugin:
+**WordPress** — add to `functions.php` or use a redirect plugin:
 ```php
 add_action('template_redirect', function() {
-    if ($_SERVER['REQUEST_URI'] === '/llms.txt') {
-        wp_redirect('https://<you>.github.io/<repo>/llms.txt', 301);
-        exit;
-    }
-    if ($_SERVER['REQUEST_URI'] === '/llms-full.txt') {
-        wp_redirect('https://<you>.github.io/<repo>/llms-full.txt', 301);
+    $map = [
+        '/llms.txt'      => 'https://<you>.github.io/<repo>/llms.txt',
+        '/llms-full.txt' => 'https://<you>.github.io/<repo>/llms-full.txt',
+    ];
+    if (isset($map[$_SERVER['REQUEST_URI']])) {
+        wp_redirect($map[$_SERVER['REQUEST_URI']], 301);
         exit;
     }
 });
 ```
-Or with `.htaccess` (Apache):
-```
-Redirect 301 /llms.txt https://<you>.github.io/<repo>/llms.txt
-Redirect 301 /llms-full.txt https://<you>.github.io/<repo>/llms-full.txt
-```
 
-**Wix**
-Dashboard > SEO Tools > URL Redirect Manager, then add 301 redirects for both paths.
-
-**Netlify**
-Add a `_redirects` file to your site root:
+**Netlify** — add a `_redirects` file to your site root:
 ```
-/llms.txt https://<you>.github.io/<repo>/llms.txt 301!
+/llms.txt      https://<you>.github.io/<repo>/llms.txt      301!
 /llms-full.txt https://<you>.github.io/<repo>/llms-full.txt 301!
 ```
 
-**Vercel**
-Add to `vercel.json`:
+**Vercel** — add to `vercel.json`:
 ```json
 {
   "redirects": [
-    { "source": "/llms.txt", "destination": "https://<you>.github.io/<repo>/llms.txt", "permanent": true },
+    { "source": "/llms.txt",      "destination": "https://<you>.github.io/<repo>/llms.txt",      "permanent": true },
     { "source": "/llms-full.txt", "destination": "https://<you>.github.io/<repo>/llms-full.txt", "permanent": true }
   ]
 }
 ```
 
-**Cloudflare Pages**
-Add a `_redirects` file:
+**Cloudflare Pages** — add a `_redirects` file:
 ```
-/llms.txt https://<you>.github.io/<repo>/llms.txt 301
+/llms.txt      https://<you>.github.io/<repo>/llms.txt      301
 /llms-full.txt https://<you>.github.io/<repo>/llms-full.txt 301
 ```
 
 **Nginx**
-Add to your server block:
 ```nginx
-location = /llms.txt { return 301 https://<you>.github.io/<repo>/llms.txt; }
+location = /llms.txt      { return 301 https://<you>.github.io/<repo>/llms.txt; }
 location = /llms-full.txt { return 301 https://<you>.github.io/<repo>/llms-full.txt; }
 ```
 
-**Static hosts without redirect support**
-If your host doesn't support server-side redirects, you can host the `llms.txt` file directly in your site's root directory. The trade-off is you'll need to update it manually or set up a separate sync mechanism.
+**Apache** — add to `.htaccess`:
+```
+Redirect 301 /llms.txt      https://<you>.github.io/<repo>/llms.txt
+Redirect 301 /llms-full.txt https://<you>.github.io/<repo>/llms-full.txt
+```
 
-## Why Static Files Instead of an MCP Server
+**No redirect support** — if your host can't do server-side redirects, copy `data/llms.txt` into your site's root directly. You'll lose the auto-update, but the content will be correct until you update it manually.
 
-Most LLMs today discover content by reading pages and fetching URLs. They don't auto-connect to MCP servers or call APIs unprompted. A static JSON API behind `llms.txt` works with every LLM right now, costs $0 to host on GitHub Pages, and requires zero maintenance after setup. When the ecosystem evolves, this approach can be extended.
+## Customizing `exclude_patterns`
+
+The scraper skips any URL containing a string in `exclude_patterns`. Use this to filter out pages that aren't useful for LLMs:
+
+```json
+"exclude_patterns": [
+  "/llms",        // your own llms page
+  "/cdn-cgi",     // Cloudflare internals
+  "/cart",        // e-commerce
+  "/checkout",
+  "/search",      // dynamic search results
+  "?s=",          // WordPress search query strings
+  "/tag/",        // tag archive pages
+  "/category/"    // category archive pages
+]
+```
+
+The scraper also automatically skips image/PDF/asset URLs, query strings, and known non-content paths (`/feed`, `/rss`, `/admin`, etc.).
+
+## Adjusting the schedule
+
+The workflow runs at 6 AM UTC by default. Edit `.github/workflows/scrape.yml` to change it:
+
+```yaml
+schedule:
+  - cron: '0 6 * * *'   # 6 AM UTC daily
+```
+
+[Crontab Guru](https://crontab.guru) is useful for building cron expressions.
+
+## Requirements
+
+- Public GitHub repository (GitHub Pages is free for public repos)
+- Your website must have a `sitemap.xml` (most CMS platforms generate one automatically)
+- No tokens or secrets required
 
 ## Cost
 

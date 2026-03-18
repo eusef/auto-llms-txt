@@ -1,625 +1,318 @@
 #!/usr/bin/env python3
 """
-Website scraper for philjohnstonii.com (Squarespace).
-Scrapes profile and blog content with special handlers, auto-discovers all
-other nav pages with a generic section-based scraper, and generates llms.txt
-and llms-full.txt from the collected data.
-Fork and customize for your own site and platform.
+Sitemap-driven website scraper.
+
+Reads config.json, traverses the sitemap, scrapes each page generically,
+and generates llms.txt and llms-full.txt for LLM consumption.
 """
 
-import requests
-from bs4 import BeautifulSoup
 import json
 import os
+import time
+import xml.etree.ElementTree as ET
 from datetime import datetime
 from urllib.parse import urljoin, urlparse
 
-BASE_URL = "https://philjohnstonii.com"
-SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-OUTPUT_DIR = os.path.join(SCRIPT_DIR, "..", "data")
+import requests
+from bs4 import BeautifulSoup
 
-# Paths to skip during auto-discovery.
-# "/" and "/blog" are handled by dedicated scrapers below.
-# Add any page you want excluded from the scrape entirely (e.g. "/llms").
-BLACKLISTED_PATHS = {"/", "/blog", "/llms"}
+SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
+ROOT_DIR = os.path.join(SCRIPT_DIR, "..")
+CONFIG_PATH = os.path.join(ROOT_DIR, "config.json")
+OUTPUT_DIR = os.path.join(ROOT_DIR, "data")
 
 os.makedirs(OUTPUT_DIR, exist_ok=True)
 
+SKIP_EXTENSIONS = {
+    ".jpg", ".jpeg", ".png", ".gif", ".webp", ".svg", ".ico",
+    ".pdf", ".zip", ".gz", ".css", ".js", ".xml", ".json",
+}
+
+SKIP_PATHS = {"/feed", "/rss", "/atom", "/admin", "/wp-admin", "/wp-login.php"}
+
+
+def load_config():
+    with open(CONFIG_PATH) as f:
+        return json.load(f)
+
 
 def get_timestamp():
-    """Return current ISO timestamp."""
     return datetime.utcnow().isoformat() + "Z"
 
 
-def fetch_page(url):
-    """Fetch a page and return BeautifulSoup object."""
+def fetch(url, timeout=15):
     try:
-        response = requests.get(url, timeout=10)
-        response.raise_for_status()
-        return BeautifulSoup(response.content, "html.parser")
+        headers = {"User-Agent": "auto-llms-txt/1.0 (sitemap scraper; github.com/eusef/auto-llms-txt)"}
+        r = requests.get(url, timeout=timeout, headers=headers, allow_redirects=True)
+        r.raise_for_status()
+        return r
     except requests.RequestException as e:
-        print(f"Error fetching {url}: {e}")
+        print(f"  WARN: {url} -> {e}")
         return None
 
 
-def discover_pages():
-    """Discover all internal nav pages from the home page, excluding blacklisted paths."""
-    soup = fetch_page(BASE_URL)
-    if not soup:
+def find_sitemap_url(base_url):
+    """Find sitemap URL from robots.txt or common locations."""
+    # Check robots.txt
+    r = fetch(urljoin(base_url, "/robots.txt"))
+    if r:
+        for line in r.text.splitlines():
+            if line.lower().startswith("sitemap:"):
+                url = line.split(":", 1)[1].strip()
+                print(f"  Found sitemap in robots.txt: {url}")
+                return url
+
+    # Try common locations
+    for path in ["/sitemap.xml", "/sitemap_index.xml"]:
+        url = urljoin(base_url, path)
+        r = fetch(url)
+        if r and r.status_code == 200 and "xml" in r.headers.get("content-type", "").lower():
+            print(f"  Found sitemap at: {url}")
+            return url
+
+    return None
+
+
+def parse_sitemap(sitemap_url, depth=0):
+    """Parse a sitemap or sitemap index and return all page URLs."""
+    if depth > 3:
         return []
 
-    pages = []
-    seen = set()
-    for nav in soup.find_all("nav"):
-        for link in nav.find_all("a"):
-            href = link.get("href", "").strip()
-            if not href.startswith("/") or href in seen or href in BLACKLISTED_PATHS:
-                continue
-            seen.add(href)
-            pages.append(href)
+    r = fetch(sitemap_url)
+    if not r:
+        return []
 
-    return pages
+    try:
+        root = ET.fromstring(r.content)
+    except ET.ParseError as e:
+        print(f"  WARN: XML parse error for {sitemap_url}: {e}")
+        return []
+
+    # Strip namespace for easier tag matching
+    ns = ""
+    if root.tag.startswith("{"):
+        ns = root.tag.split("}")[0] + "}"
+
+    # Sitemap index: recurse into sub-sitemaps
+    if "sitemapindex" in root.tag.lower():
+        urls = []
+        for loc in root.findall(f".//{ns}loc"):
+            urls.extend(parse_sitemap(loc.text.strip(), depth + 1))
+        return urls
+
+    # Regular sitemap: collect <loc> entries
+    return [loc.text.strip() for loc in root.findall(f".//{ns}loc")]
 
 
-def scrape_page_generic(path):
+def should_skip(url, base_url, exclude_patterns):
+    """Return True if this URL should not be scraped."""
+    parsed = urlparse(url)
+    base_parsed = urlparse(base_url)
+
+    # Must be same domain
+    if parsed.netloc != base_parsed.netloc:
+        return True
+
+    path = parsed.path.lower()
+
+    # Skip non-HTML file extensions
+    if any(path.endswith(ext) for ext in SKIP_EXTENSIONS):
+        return True
+
+    # Skip known non-content paths
+    if any(path == p or path.startswith(p + "/") for p in SKIP_PATHS):
+        return True
+
+    # Skip URLs with query strings (often dynamic/duplicate)
+    if parsed.query:
+        return True
+
+    # Skip fragment-only URLs
+    if parsed.fragment and not parsed.path:
+        return True
+
+    # Skip configured patterns
+    for pattern in exclude_patterns:
+        if pattern in url:
+            return True
+
+    return False
+
+
+def scrape_page(url):
     """
-    Generically scrape any page into a list of heading+content sections.
-    Works for any Squarespace (or similar) page without bespoke parsing.
+    Generic page scraper. Extracts title, meta description, and main body text.
+    Works across CMS platforms (Squarespace, WordPress, Webflow, etc.).
     """
-    url = urljoin(BASE_URL, path)
-    soup = fetch_page(url)
-    if not soup:
-        return {}
+    r = fetch(url)
+    if not r:
+        return None
 
-    slug = path.strip("/").replace("/", "-")
+    soup = BeautifulSoup(r.content, "html.parser")
+
+    # Remove elements that aren't content
+    for tag in soup.find_all(["nav", "footer", "header", "script", "style", "aside", "form"]):
+        tag.decompose()
+
     page = {
-        "path": path,
         "url": url,
-        "slug": slug,
         "title": None,
-        "sections": [],
-        "scraped_at": get_timestamp(),
-        "last_updated": get_timestamp()
+        "description": None,
+        "content": "",
     }
 
+    # Title: prefer h1 over <title> tag (title tag often has site name appended)
     h1 = soup.find("h1")
-    if h1:
+    title_tag = soup.find("title")
+    if h1 and h1.get_text(strip=True):
         page["title"] = h1.get_text(strip=True)
+    elif title_tag:
+        page["title"] = title_tag.get_text(strip=True)
 
-    article = soup.find(["article", "main"]) or soup
-    blocks = article.find_all(["h1", "h2", "h3", "h4", "p"])
+    # Meta description
+    meta = soup.find("meta", attrs={"name": "description"})
+    if meta and meta.get("content"):
+        page["description"] = meta["content"].strip()
 
-    current_section = None
-    for block in blocks:
-        text = block.get_text(strip=True)
-        if not text:
+    # Main content: prefer <main> or <article>
+    content_root = soup.find("main") or soup.find("article") or soup.find("body") or soup
+
+    blocks = []
+    seen = set()
+    for tag in content_root.find_all(["h1", "h2", "h3", "h4", "p", "li"]):
+        text = tag.get_text(separator=" ", strip=True)
+        # Skip short fragments and duplicates
+        if not text or len(text) < 15 or text in seen:
             continue
-        if block.name in ["h1", "h2", "h3", "h4"]:
-            if current_section:
-                page["sections"].append(current_section)
-            current_section = {"heading": text, "level": block.name, "content": []}
-        elif current_section is not None:
-            current_section["content"].append(text)
-        else:
-            page["sections"].append({"heading": None, "level": None, "content": [text]})
+        seen.add(text)
+        blocks.append(text)
 
-    if current_section:
-        page["sections"].append(current_section)
+    page["content"] = "\n".join(blocks)
 
     return page
 
 
-def scrape_home():
-    """Scrape home page for profile information."""
-    url = urljoin(BASE_URL, "/")
-    soup = fetch_page(url)
-
-    if not soup:
-        return {}
-
-    profile = {
-        "name": None,
-        "tagline": None,
-        "roles": [],
-        "location": None,
-        "website_url": BASE_URL,
-        "contact_form_url": None,
-        "scraped_at": get_timestamp(),
-        "last_updated": get_timestamp()
-    }
-
-    h1 = soup.find("h1")
-    if h1:
-        profile["name"] = h1.get_text(strip=True)
-
-    tagline = soup.find("h2")
-    if tagline:
-        profile["tagline"] = tagline.get_text(strip=True)
-
-    for element in soup.find_all(["p", "div", "span"]):
-        text = element.get_text(strip=True)
-        if any(role in text for role in ["Developer Relations", "Photographer", "Tinkerer", "Developer", "Engineer"]):
-            cleaned = text.replace("👨‍💻", "").replace("📸", "").replace("🔧", "").strip()
-            if cleaned and cleaned not in profile["roles"]:
-                profile["roles"].append(cleaned)
-
-    for candidate in soup.find_all(["p", "span"]):
-        text = candidate.get_text(strip=True).lower()
-        if "based in" in text or "location" in text or any(city in text for city in ["san francisco", "california", "remote"]):
-            profile["location"] = candidate.get_text(strip=True)
-            break
-
-    contact_link = soup.find("a", {"href": "/contact"})
-    if contact_link:
-        profile["contact_form_url"] = urljoin(BASE_URL, "/contact")
-    else:
-        for link in soup.find_all("a"):
-            href = link.get("href", "").lower()
-            text = link.get_text(strip=True).lower()
-            if "contact" in href or "contact" in text:
-                profile["contact_form_url"] = urljoin(BASE_URL, link.get("href", ""))
-                break
-
-    return profile
-
-
-def scrape_blog_post(post_url):
-    """Scrape individual blog post content."""
-    soup = fetch_page(post_url)
-
-    if not soup:
-        return None
-
-    post = {
-        "url": post_url,
-        "slug": post_url.split("/blog/")[-1].strip("/"),
-        "title": None,
-        "date": None,
-        "excerpt": None,
-        "full_content": None,
-        "tags": []
-    }
-
-    title_elem = soup.find("h1")
-    if title_elem:
-        post["title"] = title_elem.get_text(strip=True)
-
-    date_elem = soup.find(["time", "span"], {"class": ["date", "post-date", "published"]})
-    if date_elem:
-        post["date"] = date_elem.get_text(strip=True)
-    else:
-        for elem in soup.find_all(["span", "p"]):
-            text = elem.get_text(strip=True)
-            if any(month in text for month in ["January", "February", "March", "April", "May", "June",
-                                                  "July", "August", "September", "October", "November", "December"]):
-                post["date"] = text
-                break
-
-    article = soup.find(["article", "main"])
-    if article:
-        content_parts = []
-        for p in article.find_all("p"):
-            text = p.get_text(strip=True)
-            if text:
-                content_parts.append(text)
-        if content_parts:
-            post["full_content"] = " ".join(content_parts)
-
-    tags = soup.find_all("a", {"class": ["tag", "post-tag"]})
-    for tag in tags:
-        tag_text = tag.get_text(strip=True)
-        if tag_text and tag_text not in post["tags"]:
-            post["tags"].append(tag_text)
-
-    if not post["tags"]:
-        for elem in soup.find_all(["span", "p"]):
-            text = elem.get_text(strip=True)
-            if text.startswith("#"):
-                clean_tag = text.lstrip("#").strip()
-                if clean_tag and clean_tag not in post["tags"]:
-                    post["tags"].append(clean_tag)
-
-    if not post["excerpt"] and post["full_content"]:
-        post["excerpt"] = post["full_content"][:150] + "..."
-
-    return post
-
-
-def scrape_blog():
-    """Scrape blog listing and individual posts."""
-    url = urljoin(BASE_URL, "/blog")
-    soup = fetch_page(url)
-
-    if not soup:
-        return {}
-
-    blog = {
-        "posts": [],
-        "scraped_at": get_timestamp(),
-        "last_updated": get_timestamp()
-    }
-
-    known_posts = [
-        "/blog/phil-johnston-linkedin-leaving-linkedin-and-choosing-independence",
-        "/blog/future-of-micro-niche-ai-tools",
-        "/blog/encouraging-developers-to-share-their-stories",
-        "/blog/micro-niche-vibe-coding"
-    ]
-
-    post_links = set()
-    for link in soup.find_all("a"):
-        href = link.get("href", "")
-        if "/blog/" in href and href not in ["#", ""] and "/category/" not in href:
-            full_url = urljoin(BASE_URL, href)
-            if not full_url.rstrip("/").endswith("/blog"):
-                post_links.add(full_url)
-
-    for post_path in known_posts:
-        post_links.add(urljoin(BASE_URL, post_path))
-
-    for post_url in post_links:
-        print(f"Scraping blog post: {post_url}")
-        post = scrape_blog_post(post_url)
-        if post:
-            blog["posts"].append(post)
-
-    for article in soup.find_all("article"):
-        title = article.find(["h2", "h3"])
-        excerpt = article.find("p")
-        date = article.find(["time", "span"])
-
-        if title and not any(p["title"] == title.get_text(strip=True) for p in blog["posts"]):
-            post = {
-                "title": title.get_text(strip=True),
-                "date": date.get_text(strip=True) if date else None,
-                "excerpt": excerpt.get_text(strip=True) if excerpt else None,
-                "url": None,
-                "slug": None,
-                "full_content": None,
-                "tags": []
-            }
-            link = article.find("a")
-            if link and "/blog/" in link.get("href", ""):
-                post["url"] = urljoin(BASE_URL, link.get("href"))
-                post["slug"] = post["url"].split("/blog/")[-1].strip("/")
-            blog["posts"].append(post)
-
-    return blog
-
-
-# ── llms.txt generation ────────────────────────────────────────────────────────
-
-def _find_section(sections, keywords):
-    """Find the first section whose heading contains any keyword (case-insensitive)."""
-    for s in sections:
-        heading = (s.get("heading") or "").lower()
-        if any(kw.lower() in heading for kw in keywords):
-            return s
-    return None
-
-
-def _merge_consulting_services(sections, page_title):
-    """
-    Normalise consulting sections into (services, track_record) where:
-    - services: list of {name, price, description}
-    - track_record: list of strings (bullet items without a price)
-
-    Handles two Squarespace layout quirks:
-    1. The h1 headline appears as the first section heading — skip it.
-    2. Prices are sometimes their own <h4> section rather than paragraph
-       content of the service section — merge them back.
-    """
-    services = []
-    track_record = []
-    current = None
-
-    for s in sections:
-        heading = s.get("heading") or ""
-        content = s.get("content") or []
-
-        # Skip the page headline (same text as page title)
-        if heading == page_title:
-            continue
-
-        if "$" in heading:
-            # Price-as-heading: attach to the preceding service
-            if current is not None:
-                current["price"] = heading
-                if content and not current["description"]:
-                    current["description"] = content[0]
-        else:
-            # Flush previous service
-            if current is not None:
-                if current.get("price"):
-                    services.append(current)
-                else:
-                    track_record.append(current["name"])
-            # Start new entry
-            price = next((c for c in content if "$" in c), None)
-            desc = next((c for c in content if "$" not in c and c), None)
-            current = {"name": heading, "price": price, "description": desc}
-
-    # Flush last entry
-    if current is not None:
-        if current.get("price"):
-            services.append(current)
-        else:
-            track_record.append(current["name"])
-
-    return services, track_record
-
-
-def generate_llms_txt():
-    """Generate llms.txt and llms-full.txt from all scraped JSON data."""
-
-    def load_json(filename):
-        filepath = os.path.join(OUTPUT_DIR, filename)
-        if not os.path.exists(filepath):
-            return {}
-        with open(filepath) as f:
-            return json.load(f)
-
-    profile = load_json("profile.json")
-    blog = load_json("blog.json")
-    about = load_json("about-me.json")
-    consulting = load_json("consulting.json")
-
-    # All JSON files in data/ for the API endpoint list (exclude llms files)
-    api_files = sorted(
-        f for f in os.listdir(OUTPUT_DIR)
-        if f.endswith(".json")
-    )
-
-    name = profile.get("name") or "Site Owner"
-    website = profile.get("website_url") or BASE_URL
-    roles = profile.get("roles") or []
-    loc = profile.get("location") or ""
-    contact = profile.get("contact_form_url") or ""
-    tagline = profile.get("tagline") or ""
-    posts = blog.get("posts") or []
+def generate_llms_txt(pages, config):
+    """Generate llms.txt (concise index) and llms-full.txt (full content)."""
+    site_name = config.get("site_name", "Website")
+    description = config.get("description", "")
+    base_url = config.get("website_url", "")
+    today = get_timestamp()[:10]
 
     # ── llms.txt (concise) ────────────────────────────────────────────────────
 
-    def build_concise():
-        out = [f"# {name}", ""]
+    lines = [f"# {site_name}", ""]
 
-        if tagline:
-            out += [f"> {tagline}", ""]
+    if description:
+        lines += [f"> {description}", ""]
 
-        # Profile
-        out.append("## Profile")
-        out.append("")
-        if roles:
-            out.append(f"Roles: {', '.join(roles)}")
-        if loc:
-            out.append(f"Location: {loc}")
-        out.append(f"Website: {website}")
-        if contact:
-            out.append(f"Contact form: {contact}")
-        out.append("")
+    lines += ["## Pages", ""]
+    for page in pages:
+        title = page.get("title") or page["url"]
+        url = page["url"]
+        desc = page.get("description") or ""
+        entry = f"- [{title}]({url})"
+        if desc:
+            entry += f": {desc}"
+        lines.append(entry)
 
-        # Career
-        career = _find_section(about.get("sections", []), ["career", "timeline"])
-        if career and career.get("content"):
-            out.append("## Career")
-            out.append("")
-            for item in career["content"]:
-                out.append(f"- {item}")
-            out.append("")
-
-        # Technical Focus
-        tech = _find_section(about.get("sections", []), ["technical", "tech stack"])
-        if tech and tech.get("content"):
-            out.append("## Technical Focus")
-            out.append("")
-            for item in tech["content"]:
-                out.append(f"- {item}")
-            out.append("")
-
-        # What Sets Apart
-        diff = _find_section(about.get("sections", []), ["sets", "apart", "differentiator"])
-        if diff and diff.get("content"):
-            out.append("## What Sets Me Apart")
-            out.append("")
-            for item in diff["content"]:
-                out.append(item)
-                out.append("")
-
-        # Consulting
-        if consulting.get("sections"):
-            services, track_record = _merge_consulting_services(
-                consulting["sections"], consulting.get("title", "")
-            )
-            if services or track_record:
-                out.append("## Consulting")
-                out.append("")
-                if consulting.get("title"):
-                    out += [consulting["title"], ""]
-                for svc in services:
-                    line = f"- {svc['name']}: {svc['price']}"
-                    if svc.get("description"):
-                        line += f". {svc['description']}"
-                    out.append(line)
-                if track_record:
-                    out += ["", "Track record:"]
-                    for tr in track_record:
-                        out.append(f"- {tr}")
-                out += ["", f"Booking: {urljoin(BASE_URL, '/consulting')}", ""]
-
-        # Blog
-        if posts:
-            out.append("## Blog")
-            out.append("")
-            for post in posts:
-                title = post.get("title") or "Untitled"
-                date = post.get("date") or ""
-                url = post.get("url") or ""
-                line = f'- "{title}"'
-                if date:
-                    line += f" - {date}"
-                if url:
-                    line += f": {url}"
-                out.append(line)
-            out.append("")
-
-        # Structured Data API
-        out += ["## Structured Data API", "", "JSON endpoints (no auth required, updated daily):", ""]
-        for fname in api_files:
-            label = fname.replace("-", " ").replace(".json", "").title()
-            out.append(f"- {label}: https://eusef.github.io/auto-llms-txt/api/{fname}")
-        out.append("- Full content: https://eusef.github.io/auto-llms-txt/llms-full.txt")
-        out += ["", "Source: https://github.com/eusef/auto-llms-txt", ""]
-
-        return "\n".join(out)
+    lines += [
+        "",
+        "## About",
+        "",
+        f"Source: {base_url}",
+        f"Last updated: {today}",
+        "",
+    ]
 
     # ── llms-full.txt (verbose) ───────────────────────────────────────────────
 
-    def build_full():
-        out = [f"# {name} - Complete Profile", ""]
+    full = [f"# {site_name} — Full Content", ""]
 
-        if tagline:
-            out += [f"> {tagline}", ""]
-        out += ["---", ""]
+    if description:
+        full += [f"> {description}", ""]
 
-        # Profile block
-        out += ["## Profile", ""]
-        out.append(f"Name: {name}")
-        if tagline:
-            out.append(f"Tagline: {tagline}")
-        if roles:
-            out.append(f"Roles: {', '.join(roles)}")
-        if loc:
-            out.append(f"Location: {loc}")
-        out.append(f"Website: {website}")
-        if contact:
-            out.append(f"Contact: {contact}")
-        out += ["", "---", ""]
+    full += ["---", ""]
 
-        # About Me sections
-        about_sections = about.get("sections") or []
-        if about_sections:
-            out += ["## Summary", ""]
-            for s in about_sections:
-                heading = s.get("heading") or ""
-                content = s.get("content") or []
-                if heading:
-                    out += [f"### {heading}", ""]
-                for c in content:
-                    out.append(c)
-                out.append("")
-            out += ["---", ""]
+    for page in pages:
+        title = page.get("title") or page["url"]
+        url = page["url"]
+        desc = page.get("description") or ""
+        content = page.get("content") or ""
 
-        # Consulting full detail
-        if consulting.get("sections"):
-            services, track_record = _merge_consulting_services(
-                consulting["sections"], consulting.get("title", "")
-            )
-            if services or track_record:
-                out += ["## Consulting", ""]
-                if consulting.get("title"):
-                    out += [f"Headline: {consulting['title']}", ""]
-                for svc in services:
-                    out.append(f"### {svc['name']}")
-                    out.append(f"Price: {svc['price']}")
-                    if svc.get("description"):
-                        out.append(f"Description: {svc['description']}")
-                    out.append("")
-                if track_record:
-                    out += ["### Track Record", ""]
-                    for tr in track_record:
-                        out.append(f"- {tr}")
-                    out.append("")
-                out += [f"Booking: {urljoin(BASE_URL, '/consulting')}", "", "---", ""]
+        full += [f"## {title}", "", f"URL: {url}"]
+        if desc:
+            full.append(f"Summary: {desc}")
+        full.append("")
+        if content:
+            full.append(content)
+        full += ["", "---", ""]
 
-        # Blog full posts
-        if posts:
-            out += ["## Blog Posts", ""]
-            for post in posts:
-                title = post.get("title") or "Untitled"
-                date = post.get("date") or ""
-                url = post.get("url") or ""
-                excerpt = post.get("excerpt") or ""
-                tags = post.get("tags") or []
-                out.append(f"### {title}")
-                if date:
-                    out.append(f"Published: {date}")
-                if url:
-                    out.append(f"URL: {url}")
-                if excerpt:
-                    out += ["", excerpt]
-                if tags:
-                    out.append(f"Tags: {', '.join(tags)}")
-                out.append("")
-            out += ["---", ""]
+    full += [f"Source: {base_url}", f"Last updated: {today}", ""]
 
-        # Structured Data API
-        out += ["## Structured Data API", "",
-                "All data is available as JSON at these public endpoints (no authentication required, updated daily):", ""]
-        for fname in api_files:
-            label = fname.replace("-", " ").replace(".json", "").title()
-            out.append(f"- {label}: https://eusef.github.io/auto-llms-txt/api/{fname}")
-        out += ["", "Source: https://github.com/eusef/auto-llms-txt", "", "---", "",
-                f"Last updated: {get_timestamp()[:10]}", ""]
-
-        return "\n".join(out)
-
-    save_text("llms.txt", build_concise())
-    save_text("llms-full.txt", build_full())
-
-
-# ── I/O helpers ────────────────────────────────────────────────────────────────
-
-def save_json(filename, data):
-    """Save data to JSON file in output directory."""
-    filepath = os.path.join(OUTPUT_DIR, filename)
-    with open(filepath, "w") as f:
-        json.dump(data, f, indent=2)
-    print(f"Saved: {filepath}")
+    return "\n".join(lines), "\n".join(full)
 
 
 def save_text(filename, content):
-    """Save text content to output directory."""
-    filepath = os.path.join(OUTPUT_DIR, filename)
-    with open(filepath, "w") as f:
+    path = os.path.join(OUTPUT_DIR, filename)
+    with open(path, "w", encoding="utf-8") as f:
         f.write(content)
-    print(f"Saved: {filepath}")
+    print(f"  Saved: {path}")
 
 
-# ── Main ───────────────────────────────────────────────────────────────────────
+# ── Main ──────────────────────────────────────────────────────────────────────
 
 def main():
-    """Run the full scrape."""
-    print(f"Starting scrape of {BASE_URL}")
+    config = load_config()
+    base_url = config["website_url"].rstrip("/")
+    exclude_patterns = config.get("exclude_patterns", [])
+
+    print(f"Scraping: {base_url}")
     print(f"Timestamp: {get_timestamp()}")
     print()
 
-    print("Scraping home page...")
-    profile = scrape_home()
-    save_json("profile.json", profile)
+    # Discover URLs via sitemap
+    print("Finding sitemap...")
+    sitemap_url = find_sitemap_url(base_url)
+    if sitemap_url:
+        all_urls = parse_sitemap(sitemap_url)
+        print(f"Sitemap contains {len(all_urls)} URLs")
+    else:
+        print("No sitemap found, will scrape homepage only")
+        all_urls = [base_url]
+
+    # Filter
+    urls = [u for u in all_urls if not should_skip(u, base_url, exclude_patterns)]
+
+    # Deduplicate, preserve order
+    seen_urls = set()
+    unique_urls = []
+    for u in urls:
+        if u not in seen_urls:
+            seen_urls.add(u)
+            unique_urls.append(u)
+
+    print(f"Pages to scrape: {len(unique_urls)}")
     print()
 
-    print("Scraping blog...")
-    blog = scrape_blog()
-    save_json("blog.json", blog)
-    print()
+    # Scrape each page
+    pages = []
+    for i, url in enumerate(unique_urls, 1):
+        print(f"[{i}/{len(unique_urls)}] {url}")
+        page = scrape_page(url)
+        if page and (page.get("title") or page.get("content")):
+            pages.append(page)
+        time.sleep(0.5)  # be polite
 
-    print("Discovering pages...")
-    pages = discover_pages()
-    print(f"Found: {pages}")
-    print()
+    print(f"\nScraped {len(pages)} pages with content")
 
-    for path in pages:
-        slug = path.strip("/").replace("/", "-")
-        print(f"Scraping {path}...")
-        page_data = scrape_page_generic(path)
-        save_json(f"{slug}.json", page_data)
+    # Generate output
+    print("\nGenerating llms.txt and llms-full.txt...")
+    concise, full = generate_llms_txt(pages, config)
+    save_text("llms.txt", concise)
+    save_text("llms-full.txt", full)
 
-    print()
-    print("Generating llms.txt and llms-full.txt...")
-    generate_llms_txt()
-
-    print()
-    print("Scrape complete!")
+    print(f"\nDone! {len(pages)} pages indexed.")
 
 
 if __name__ == "__main__":

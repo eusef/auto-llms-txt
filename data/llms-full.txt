@@ -46,6 +46,7 @@ AI discoverability isn’t a separate discipline from developer relations. It’
 The difference is that the audience now includes machines as well as humans. Documentation that’s clear enough for a junior developer to follow is also clear enough for an LLM to parse. Tutorials that solve real problems get cited by AI assistants. Structured data that helps Google also helps ChatGPT.
 The companies that figure this out early will have a compounding advantage. Every piece of content, every MCP integration, every structured data improvement makes them more visible to AI tools, which drives more adoption, which generates more community content, which makes them even more visible. The flywheel effect is real, and it’s already spinning for the companies paying attention.
 The ones that wait will wonder why their organic growth flatlined while their competitors seem to be everywhere.
+What Running DevRel at 1Password Taught Me About Open Source and Developer Trust
 15,000 Developers During a Pandemic: What I Learned at HERE Technologies
 
 ---
@@ -122,12 +123,9 @@ If any of this resonates, I’d like to hear about what you’re building. You c
 ## “Phil Johnston LinkedIn” (Leaving LinkedIn and Choosing Independence)
 
 URL: https://philjohnstonii.com/blog/phil-johnston-linkedin-leaving-linkedin-and-choosing-independence
-Summary: After nearly two decades on LinkedIn, I lost my account overnight due
-    to a compromise and policy enforcement. I understand LinkedIn’s
-    decision, but the experience forced me to confront how fragile a
-    centralized professional identity really is. This post isn’t about
-    blame. It’s about lessons learned, security realities, and why I’m
-    choosing a more independent path forward.
+Summary: After my LinkedIn account was compromised and permanently removed, I lost 
+nearly two decades of professional connections. This is about what happens 
+when a single platform becomes too central to your professional identity.
 
 “Phil Johnston LinkedIn” (Leaving LinkedIn and Choosing Independence)
 This is not a post about being angry at LinkedIn.
@@ -207,10 +205,9 @@ Encouraging Developers to Share Their Stories in Their Own Words
 ## Encouraging Developers to Share Their Stories in Their Own Words
 
 URL: https://philjohnstonii.com/blog/encouraging-developers-to-share-their-stories
-Summary: As a developer relations professional, one of our goals is to highlight the 
-voices of the developers we work with. Recently, I’ve been focusing on 
-inviting developers to share their projects in their own words. Here are 
-some of the tactics and lessons learned along the way.
+Summary: One of the most effective DevRel tactics is personally inviting developers 
+to write about their projects in their own words. Here are the strategies 
+and lessons learned from building a developer storytelling program.
 
 Encouraging Developers to Share Their Stories in Their Own Words
 As a developer relations professional, one of our goals is to highlight the voices of the developers we work with. Recently, I’ve been focusing on inviting developers to share their projects in their own words. Here are some of the tactics and lessons learned along the way.
@@ -236,12 +233,9 @@ Micro-niche vibe coding?
 ## Micro-niche vibe coding?
 
 URL: https://philjohnstonii.com/blog/micro-niche-vibe-coding
-Summary: I’ve been vibing lately with terminal UI (TUI) apps. Small personal tools 
-that help me optimize a very specific task or workflow. I call these 
-"Micro-Niche" tools. I can spin these tools up in an afternoon, where 
-before I would have just kept plodding along without them.
-
-This is the project that finally worked!
+Summary: I've been building small terminal UI apps tuned to very specific personal 
+workflows. It's vibe coding at its most practical: making the tools to be 
+more productive, one micro-niche problem at a time.
 
 Micro-niche vibe coding?
 I’ve been vibing lately with terminal UI (TUI) apps. Small personal tools that help me optimize a very specific task or workflow. I call these "Micro-Niche" tools. I can spin these tools up in an afternoon, where before I would have just kept plodding along without them.
@@ -326,4 +320,4 @@ Book a 15-minute call
 ---
 
 Source: https://philjohnstonii.com
-Last updated: 2026-03-20
+Last updated: 2026-03-21

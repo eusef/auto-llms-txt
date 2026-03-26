@@ -4,12 +4,81 @@
 
 ---
 
+## Vibe Coding Got You the Prototype. Now What?
+
+URL: https://philjohnstonii.com/blog/pua6p9xgs4r03fjb8570vkp17cabzm
+Summary: Vibe coding is great for prototypes, but production software still needs guardrails. Here’s why AI-generated code demands the same SDLC discipline we’ve always applied, and how an 8-stage agent pipeline keeps things from falling apart.
+
+Vibe Coding Got You the Prototype. Now What?
+This is the third post in a series about on-demand software. The first covered why most business software is about to become regenerable. The second explained why document standards are the interoperability layer that makes it all work. This one is about the part that makes it trustworthy.
+Because here is the uncomfortable truth about vibe coding: it is fantastic for getting something working. It is terrible for keeping it working.
+The Prototype Trap
+I speak from experience. Earlier this year I built a terminal-based tool for reading community forum data. The first version came together in an afternoon. I described what I wanted, an LLM generated the code, and I had a working TUI by end of day.
+Then I used it the next day. And the day after that. And within a week, I had found three bugs, wanted two new features, and needed to refactor the data layer because my initial description had not accounted for edge cases that only showed up with real usage.
+That iteration process, finding bugs, adding features, refactoring as requirements clarify, is the software development lifecycle. I was not following a formal SDLC process. I was just doing what every developer does when a prototype becomes a daily-driver tool. But the practices were the same: version control to track changes, testing to catch regressions, and careful iteration to avoid breaking what already worked.
+The moment on-demand software becomes something a user depends on, it needs exactly these guardrails. Without them, every improvement risks breaking something else. Every new feature is a coin flip between progress and regression.
+Why AI Generates Regressions Fast
+LLMs are incredibly good at generating code. They are also incredibly good at generating regressions. The same capability that lets a model build a working application in one session also lets it subtly break that application in the next session when you ask for a change.
+This is not a flaw in the technology. It is a fundamental property of how generative models work. Each generation is statistically independent. The model does not remember that the authentication flow depends on a specific token format, or that the date parser expects ISO 8601, or that the CSS layout breaks if you change the grid columns. It generates the best response to the current prompt, and sometimes that response contradicts a decision made in a previous generation.
+In traditional software development, this problem is solved by automated testing. You write tests that encode your assumptions, and those tests catch it when a change violates them. In the AI-generated software world, the same principle applies. You need a pipeline that validates output before it reaches the user.
+What a Pipeline Looks Like
+I have been building this exact system. My agent pipeline project defines eight workflow stages and nine agent roles that mirror a traditional SDLC process, compressed and automated.
+The flow works like this. An Orchestrator agent receives a task description and routes it to a Project Manager agent. The PM produces a structured brief. An Architect agent turns that brief into a technical specification. Engineering agents build from the spec. QA agents run automated tests. Security agents scan for vulnerabilities. Accessibility agents check compliance. And only after all of those gates pass does the output move toward deployment.
+Each handoff is a checkpoint. Each checkpoint has defined acceptance criteria. The agents are not making subjective judgment calls about whether something “looks right.” They are validating against specific, codified requirements.
+This is SDLC. It is not bureaucracy. It is the thing that makes the difference between a prototype that works once and software that works reliably over time.
+The Five-Tier Reality
+Not every project needs the full pipeline. A quick utility script does not need a security audit and accessibility review. A production application handling financial data needs all of that and more.
+My framework defines five project tiers based on complexity and risk. A micro task, something that takes minutes, gets minimal process. A production deployment gets the full treatment: architecture review, test coverage requirements, security scanning, accessibility validation, and staged rollout.
+The insight is that SDLC is not one-size-fits-all. The practices scale with the stakes. Vibe coding is perfectly appropriate for tier one. It is dangerously insufficient for tier four or five. The pipeline provides the right level of rigor for each context.
+Security Is Not Optional
+Here is the part that keeps me up at night. AI-generated code inherits whatever patterns the model learned from training data. Some of those patterns include insecure defaults, outdated authentication methods, and vulnerable dependency versions.
+In my pipeline, a git push triggers automated security scanning. Known vulnerability patterns are checked against the generated code. Issues are reported as structured findings that the Engineering agent must resolve before the code can merge.
+This is not paranoia. This is standard practice in any mature engineering organization. The difference is that when humans write code, security review happens during code review. When AI generates code, security review needs to be automated because the volume and velocity of generated code makes manual review impractical.
+On-demand software that skips security validation is on-demand liability. The tools need to be trustworthy, and trustworthiness comes from process, not from hope.
+What This Means for On-Demand Software
+If the future I described in the first two posts arrives, and I believe it will, then SDLC practices become the trust infrastructure that makes on-demand software viable for serious use.
+A user generates a maintenance tracking tool. The generation pipeline runs it through schema validation to ensure it respects the data contracts from the standards layer. Automated tests verify that the core workflows function correctly. Security scanning checks for common vulnerabilities. Accessibility validation ensures it meets baseline usability standards.
+All of this happens in seconds, not weeks. The pipeline is automated, and the guardrails are codified. The user never sees the process. They just get software that works and keeps working.
+That is the vision. Not vibe coding with fingers crossed, but AI-generated software backed by the same engineering discipline that makes traditional software reliable. The SDLC is not dead. It is faster, automated, and more necessary than ever.
+The next post in this series steps back from the technical and asks a different question: when AI agents review each other’s work, acting as domain experts in QA, security, and architecture, is that review good enough? Or do we still need humans in the loop?
+Building GoPro’s Developer Program from Zero to 330 Partners
+
+---
+
+## Building GoPro’s Developer Program from Zero to 330 Partners
+
+URL: https://philjohnstonii.com/blog/building-gopros-developer-program-from-zero-to-330-partners
+Summary: How Phil Johnston built GoPro's developer program from zero to 330+ partners including NASA, Google, and BMW. Lessons on building developer ecosystems at hardware companies.
+
+Building GoPro’s Developer Program from Zero to 330 Partners
+When I joined GoPro in 2014, the company had no developer program, no SDK, no documentation, and no partner ecosystem. By the time the program was running, it had 330+ partner companies, a team of 10, and names like NASA, Google, BMW, and Jaguar Land Rover building on the platform.
+This is the story of how that happened, and what I learned about building developer programs from nothing.
+Starting from Zero
+GoPro in 2014 was a hardware company with massive consumer brand recognition and zero developer infrastructure. There was no public API, no partner portal, no technical documentation. The cameras were everywhere, but the ecosystem around them was entirely closed.
+The opportunity was obvious: GoPro cameras were already showing up in professional workflows at media companies, automotive manufacturers, aerospace organizations, and research labs. These organizations were hacking together their own integrations. They wanted official support, and GoPro had no mechanism to provide it.
+My job was to build that mechanism from scratch.
+The First Year: Making the Internal Case
+The hardest part of zero-to-one DevRel isn’t the technical work. It’s the internal alignment. At a hardware company, engineering resources are finite and already committed to the next product cycle. Convincing leadership to invest in a developer platform means showing a credible path to revenue or strategic value that justifies pulling engineers off the roadmap.
+I spent the first phase building the business case: which partners would move the needle, what an SDK and documentation package would cost to build, and what the addressable market looked like if we opened the platform. The key insight was framing it not as “developer relations” (which meant nothing to a hardware executive team) but as “strategic moat” in the form of partnerships enabled by technology. Same work, different language.
+Scaling to 330+ Partners
+Once the SDK shipped and the partner portal launched, growth came from a deliberate strategy of targeting high-visibility partners first. Landing NASA, Google, and BMW as early adopters did two things: it validated the platform technically (if NASA’s JPL can build on it, your startup can too) and it created a marketing flywheel that attracted the next wave of partners.
+The engineering team grew to 10 people supporting the ecosystem, handling everything from SDK development to partner integration support. We built the onboarding flow, the documentation, the sample code, and the partner success process that took a company from “interested” to “shipping an integration.”
+The program wasn’t just about partner count. It was about ensuring that each integration actually worked and delivered value. A partnership with BMW meant GoPro cameras integrated into vehicle dashboards. A partnership with a sports analytics company meant automatic highlight generation. Every integration had to solve a real problem for a real user.
+What I Took Away
+Building GoPro’s developer program taught me three things that I still apply to every engagement.
+First, developer programs at hardware companies are fundamentally different from software companies. You’re dealing with physical constraints, firmware update cycles, and engineering teams that think in silicon, not APIs.
+Second, enterprise partnerships and indie developer communities require completely different approaches. At GoPro, the value was in enterprise partnerships, not a long tail of indie developers. Knowing which model fits your company is the most important strategic decision in early-stage DevRel.
+Third, the zero-to-one phase is mostly about internal selling. You spend more time in slide decks and executive meetings than you do writing documentation. That’s normal, and it’s necessary. The program doesn’t exist until the organization believes it should.
+GoPro taught me how to build something from nothing at a company that had never invested in developers before. That pattern, making the case internally, shipping the infrastructure, landing the first partners, and scaling the program, is the same one I’ve repeated at BMW and 1Password, and the same one I bring to every fractional engagement today.
+Vibe Coding Got You the Prototype. Now What?
+Standards Are the New Moats
+
+---
+
 ## Standards Are the New Moats
 
 URL: https://philjohnstonii.com/blog/standards-are-the-new-moats
-Summary: If on-demand software is the future, interoperability is its foundation. 
-JSON Schema, OpenAPI, MCP, and llms.txt are becoming the standards that 
-determine whether AI-generated tools can actually talk to each other.
+Summary: If on-demand software is the future, interoperability is its foundation. JSON Schema, OpenAPI, MCP, and llms.txt are becoming the standards that determine whether AI-generated tools can actually talk to each other.
 
 Standards Are the New Moats
 In my last post I argued that most business software is about to become on-demand. Users describe what they need, an LLM generates it, and the tool exists as long as they need it. If that future sounds exciting but fragile, you are paying attention.
@@ -48,9 +117,7 @@ The Last SaaS You’ll Ever Subscribe To
 ## The Last SaaS You’ll Ever Subscribe To
 
 URL: https://philjohnstonii.com/blog/the-last-saas-youll-ever-subscribe-to
-Summary: Most business software is a UI layer on top of well-documented rules. As 
-LLMs get better at generating those interfaces on demand, the subscription 
-model starts to look like a relic. This is what comes next.
+Summary: Most business software is a UI layer on top of well-documented rules. As LLMs get better at generating those interfaces on demand, the subscription model starts to look like a relic. This is what comes next.
 
 The Last SaaS You’ll Ever Subscribe To
 In September, I wrote about the future of micro-niche AI tools. The core idea was simple: instead of hunting for software that sort of fits your needs, you describe what you want and an LLM builds it for you in minutes. That post focused on personal tools. Scripts, dashboards, one-off utilities tuned to how you actually work.
@@ -89,9 +156,7 @@ What Running DevRel at 1Password Taught Me About Open Source and Developer Trust
 ## What Running DevRel at 1Password Taught Me About Open Source and Developer Trust
 
 URL: https://philjohnstonii.com/blog/what-running-devrel-at-1password-taught-me-about-open-source-and-developer-trust
-Summary: Lessons from building DevRel at 1Password: managing 900+ open source 
-projects, scaling technical content, and why trust is the product for 
-security-focused developer tools.
+Summary: Lessons from building DevRel at 1Password: managing 900+ open source projects, scaling technical content, and why trust is the product for security-focused developer tools.
 
 What Running DevRel at 1Password Taught Me About Open Source and Developer Trust
 1Password is a product that developers already love. That’s a rare starting position for a DevRel program. Most companies have to convince developers to care. At 1Password, the challenge was different: how do you build a formal developer relations function around a product that already has organic developer affinity, without breaking the trust that earned it?
@@ -123,10 +188,7 @@ Your Developer Tool Is Invisible to AI. That’s a Problem.
 ## Your Developer Tool Is Invisible to AI. That’s a Problem.
 
 URL: https://philjohnstonii.com/blog/your-developer-tool-is-invisible-to-ai-thats-a-problem
-Summary: AI tools are reshaping how developers discover and evaluate APIs and SDKs. 
-Learn what makes a developer tool visible to LLMs, why most companies are 
-behind, and tactical steps to fix it including llms.txt, JSON-LD, MCP 
-servers, and content strategy.
+Summary: AI tools are reshaping how developers discover and evaluate APIs and SDKs. Learn what makes a developer tool visible to LLMs, why most companies are behind, and tactical steps to fix it including llms.txt, JSON-LD, MCP servers, and content strategy.
 
 Your Developer Tool Is Invisible to AI. That’s a Problem.
 In 2024, a developer evaluating a new library would Google it, scan the docs, maybe check a Reddit thread. In 2026, a growing number of developers skip all of that. They ask an AI assistant.
@@ -170,9 +232,7 @@ What Running DevRel at 1Password Taught Me About Open Source and Developer Trust
 ## 15,000 Developers During a Pandemic: What I Learned at HERE Technologies
 
 URL: https://philjohnstonii.com/blog/iuqdpdkpo11dzgygsoz7j7cbiwq9zx
-Summary: How Phil Johnston onboarded 15,000 developers at HERE Technologies during 
-the pandemic using digital-first DevRel, then expanded the cloud 
-marketplace by 2,250x as product manager.
+Summary: How Phil Johnston onboarded 15,000 developers at HERE Technologies during the pandemic using digital-first DevRel, then expanded the cloud marketplace by 2,250x as product manager.
 
 15,000 Developers During a Pandemic: What I Learned at HERE Technologies
 In March 2020, every developer conference on our calendar disappeared overnight. I was leading developer relations technical content marketing at HERE Technologies, a location intelligence platform, and suddenly the entire playbook was gone. No booths, no talks, no hallway conversations, no hackathons.
@@ -203,9 +263,7 @@ How I Help API-First Companies Build Developer Programs That Actually Work
 ## How I Help API-First Companies Build Developer Programs That Actually Work
 
 URL: https://philjohnstonii.com/blog/how-i-help-api-first-companies-build-developer-programs-that-actually-work
-Summary: Phil Johnston is a fractional Head of Developer Relations helping API-first 
-companies build developer programs, partnerships, and AI discoverability. 
-15 years of experience at GoPro, BMW, HERE Technologies, and 1Password.
+Summary: Phil Johnston is a fractional Head of Developer Relations helping API-first companies build developer programs, partnerships, and AI discoverability. 15 years of experience at GoPro, BMW, HERE Technologies, and 1Password.
 
 How I Help API-First Companies Build Developer Programs That Actually Work
 Most companies know they need a developer program. Fewer know how to build one. And almost none want to wait 18 months for a full-time hire to figure it out.
@@ -239,9 +297,7 @@ If any of this resonates, I’d like to hear about what you’re building. You c
 ## “Phil Johnston LinkedIn” (Leaving LinkedIn and Choosing Independence)
 
 URL: https://philjohnstonii.com/blog/phil-johnston-linkedin-leaving-linkedin-and-choosing-independence
-Summary: After my LinkedIn account was compromised and permanently removed, I lost 
-nearly two decades of professional connections. This is about what happens 
-when a single platform becomes too central to your professional identity.
+Summary: After my LinkedIn account was compromised and permanently removed, I lost nearly two decades of professional connections. This is about what happens when a single platform becomes too central to your professional identity.
 
 “Phil Johnston LinkedIn” (Leaving LinkedIn and Choosing Independence)
 This is not a post about being angry at LinkedIn.
@@ -270,10 +326,7 @@ The Future of Micro-Niche AI Tools
 ## The Future of Micro-Niche AI Tools
 
 URL: https://philjohnstonii.com/blog/future-of-micro-niche-ai-tools
-Summary: As someone who’s soon to be less relevant when it comes to technology, I am 
-personally augmenting my workflows to include self-developed tools to help 
-me get my work done. One recent example is a quick script that will test 
-server
+Summary: As someone who’s soon to be less relevant when it comes to technology, I am personally augmenting my workflows to include self-developed tools to help me get my work done.  One recent example is a quick script that will test server
 
 The Future of Micro-Niche AI Tools
 Sandcastles at Cannon Beach, Oregon
@@ -321,9 +374,7 @@ Encouraging Developers to Share Their Stories in Their Own Words
 ## Encouraging Developers to Share Their Stories in Their Own Words
 
 URL: https://philjohnstonii.com/blog/encouraging-developers-to-share-their-stories
-Summary: One of the most effective DevRel tactics is personally inviting developers 
-to write about their projects in their own words. Here are the strategies 
-and lessons learned from building a developer storytelling program.
+Summary: One of the most effective DevRel tactics is personally inviting developers to write about their projects in their own words. Here are the strategies and lessons learned from building a developer storytelling program.
 
 Encouraging Developers to Share Their Stories in Their Own Words
 As a developer relations professional, one of our goals is to highlight the voices of the developers we work with. Recently, I’ve been focusing on inviting developers to share their projects in their own words. Here are some of the tactics and lessons learned along the way.
@@ -349,9 +400,7 @@ Micro-niche vibe coding?
 ## Micro-niche vibe coding?
 
 URL: https://philjohnstonii.com/blog/micro-niche-vibe-coding
-Summary: I've been building small terminal UI apps tuned to very specific personal 
-workflows. It's vibe coding at its most practical: making the tools to be 
-more productive, one micro-niche problem at a time.
+Summary: I've been building small terminal UI apps tuned to very specific personal workflows. It's vibe coding at its most practical: making the tools to be more productive, one micro-niche problem at a time.
 
 Micro-niche vibe coding?
 I’ve been vibing lately with terminal UI (TUI) apps. Small personal tools that help me optimize a very specific task or workflow. I call these "Micro-Niche" tools. I can spin these tools up in an afternoon, where before I would have just kept plodding along without them.
@@ -380,10 +429,7 @@ Encouraging Developers to Share Their Stories in Their Own Words
 ## Phil Johnston, II
 
 URL: https://philjohnstonii.com/resume
-Summary: Resume of Phil Johnston, II. 15 years in Developer Relations at BMW, GoPro, 
-HERE Technologies, and 1Password. Built the GoPro Developer Program to 330+ 
-partners including NASA and Google. Onboarded 15,000+ developers. Based in 
-Portland, OR.
+Summary: Resume of Phil Johnston, II. 15 years in Developer Relations at BMW, GoPro, HERE Technologies, and 1Password. Built the GoPro Developer Program to 330+ partners including NASA and Google. Onboarded 15,000+ developers. Based in Portland, OR.
 
 Phil Johnston, II
 I've spent 15 years helping developers succeed on platforms most people only read about in press releases.
@@ -418,10 +464,7 @@ Content at Scale Across my career, I've produced and directed 123+ developer tut
 ## I help API-first companies build developer programs that drive adoption.
 
 URL: https://philjohnstonii.com/consulting
-Summary: Fractional DevRel consulting for API-first companies. Services include 
-Fractional Head of DevRel ($5,000/mo), DevRel Program Audit ($2,500), and 
-AI DevRel Accelerator ($3,500-4,000). Track record with GoPro, HERE 
-Technologies, and 1Password.
+Summary: Fractional DevRel consulting for API-first companies. Services include Fractional Head of DevRel ($5,000/mo), DevRel Program Audit ($2,500), and AI DevRel Accelerator ($3,500-4,000). Track record with GoPro, HERE Technologies, and 1Password.
 
 I help API-first companies build developer programs that drive adoption.
 Fractional Head of DevRel
@@ -438,4 +481,4 @@ Book a 15-minute call
 ---
 
 Source: https://philjohnstonii.com
-Last updated: 2026-03-25
+Last updated: 2026-03-26

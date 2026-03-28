@@ -4,6 +4,43 @@
 
 ---
 
+## The 80/20 Rule for AI Code Review
+
+URL: https://philjohnstonii.com/blog/wc9s23btpmv673x8k9ihp15w2b668e
+Summary: LLM-powered agents can simulate QA, security, and architecture expertise well enough to catch 80% of the issues a human reviewer would. The question is whether that last 20% still justifies the cost of a dedicated specialist.
+
+The 80/20 Rule for AI Code Review
+My agent pipeline has a QA agent, a Security agent, and an Architect agent. Each one reviews the work of the Engineering agents, checking for bugs, vulnerabilities, and design inconsistencies. They are not humans. They are LLM-powered roles that simulate domain expertise.
+And they are surprisingly good. Good enough that I have started asking a question I did not expect to ask this soon: when does simulated expertise actually replace the real thing?
+What Acting Experts Do Well
+An LLM prompted to act as a security auditor can catch a remarkable number of common issues. SQL injection patterns, insecure default configurations, hardcoded credentials, missing input validation, outdated dependency versions. These are pattern-matching tasks, and pattern matching is what language models excel at.
+The same applies to QA. A model asked to review code for test coverage gaps, edge case handling, and regression risks will flag issues that many junior and mid-level engineers would miss in a first pass. It does not get tired. It does not rush because it is Friday afternoon. It applies the same scrutiny to the 200th file as it does to the first.
+In my pipeline, these acting experts operate as automated gates. Code does not advance to the next stage until the QA agent confirms test coverage, the Security agent clears the vulnerability scan, and the Architect agent validates that the implementation matches the specification. Each review is structured, consistent, and fast.
+For routine review tasks, this works. It works well enough that I trust it for the majority of checks in my personal projects.
+Where Acting Experts Fall Short
+Here is where it gets interesting. There is a category of review that language models are bad at, and it is the category that matters most for high-stakes decisions.
+Taste. Is this API design elegant, or just functional? Does this error message help the user, or just satisfy the requirement? An LLM can tell you whether an error message exists. It cannot tell you whether the error message makes a frustrated developer feel supported or confused.
+Contextual judgment. Should this feature be built at all? Is this the right abstraction, or will it create problems six months from now when requirements change? These questions require understanding the business context, the team dynamics, and the product strategy in ways that a prompt cannot fully capture.
+Novel edge cases. Acting experts are trained on patterns. They catch known patterns well. They struggle with situations that do not map to existing patterns. A truly novel security vulnerability, one that exploits an interaction between two systems in an unexpected way, is exactly the kind of thing that slips past a simulated reviewer because it does not match anything in the training data.
+Ethical gray areas. Is this feature manipulative? Does this data collection practice respect user privacy even if it is technically legal? These are judgment calls that require values, not just knowledge.
+I have seen this in my own work. I have spent over 15 years reviewing developer content, documentation, and tutorials. The things I catch that an AI reviewer misses are almost always about tone, not accuracy. The documentation is technically correct but subtly condescending. The tutorial works but teaches a bad habit. The API design is functional but will frustrate anyone who tries to extend it.
+The 80/20 Split
+My working hypothesis is that acting experts are sufficient for roughly 80% of review tasks. The routine checks, the pattern-matching, the compliance validation, the test coverage analysis. All of this can and should be automated. It is faster, more consistent, and more thorough than human review at scale.
+The remaining 20% is where humans earn their keep. Novel situations, creative judgment, ethical considerations, and the kind of taste-based feedback that comes from years of experience in a domain. These are the moments where a human reviewer says “this is technically fine but it is going to confuse people” and that feedback changes the trajectory of the product.
+The pattern I use in my pipeline reflects this split. AI agents handle the automated gates. For high-stakes decisions, there are explicit approval checkpoints where a human reviews the output before it advances. The property management system I am building has owner-approval gates for financial decisions and legal documents. Same principle, different domain.
+Human in the Loop Is Not a Compromise
+There is a temptation to frame “human in the loop” as a temporary measure. A crutch that we will eventually discard as AI gets better. I do not think that is right.
+Human judgment is not a less efficient version of AI review. It is a fundamentally different kind of review. It draws on embodied experience, emotional intelligence, aesthetic sensibility, and ethical reasoning that language models simulate but do not possess.
+The goal is not to remove humans from the loop. The goal is to put them in the right part of the loop. Do not waste a senior architect’s time checking whether variable names follow the style guide. That is what the AI reviewer is for. Put the senior architect in front of the design decisions that will determine whether the system scales, whether the developer experience is good, and whether the abstraction layer is right.
+What This Means in Practice
+If you are building AI-assisted workflows, the question is not “can AI replace human review?” It is “which reviews should AI handle, and which reviews need a human?”
+For automated testing, vulnerability scanning, style compliance, and coverage analysis: let the acting experts handle it. They are better at consistency and scale than any human team.
+For design taste, strategic direction, novel risk assessment, and ethical judgment: keep humans in the loop. Not because AI cannot attempt these tasks, but because the cost of getting them wrong is high and the value of getting them right compounds over time.
+The 80/20 split is not a permanent ratio. As models improve, the boundary will shift. But the category of tasks that requires human judgment will not shrink to zero. It will just become more concentrated on the decisions that matter most.
+Vibe Coding Got You the Prototype. Now What?
+
+---
+
 ## Vibe Coding Got You the Prototype. Now What?
 
 URL: https://philjohnstonii.com/blog/pua6p9xgs4r03fjb8570vkp17cabzm
@@ -41,6 +78,7 @@ A user generates a maintenance tracking tool. The generation pipeline runs it th
 All of this happens in seconds, not weeks. The pipeline is automated, and the guardrails are codified. The user never sees the process. They just get software that works and keeps working.
 That is the vision. Not vibe coding with fingers crossed, but AI-generated software backed by the same engineering discipline that makes traditional software reliable. The SDLC is not dead. It is faster, automated, and more necessary than ever.
 The next post in this series steps back from the technical and asks a different question: when AI agents review each other’s work, acting as domain experts in QA, security, and architecture, is that review good enough? Or do we still need humans in the loop?
+The 80/20 Rule for AI Code Review
 Building GoPro’s Developer Program from Zero to 330 Partners
 
 ---
@@ -481,4 +519,4 @@ Book a 15-minute call
 ---
 
 Source: https://philjohnstonii.com
-Last updated: 2026-03-27
+Last updated: 2026-03-28

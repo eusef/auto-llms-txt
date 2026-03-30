@@ -4,6 +4,41 @@
 
 ---
 
+## Code Is Commodity. Art Direction Is the Moat.
+
+URL: https://philjohnstonii.com/blog/hb3sdhgq74qbq63nhp90s6h4gf5cpa
+Summary: AI can generate code, but it can’t replace the human eye for design. Game artists, trained in composition, color theory, and spatial storytelling, are uniquely positioned to shape the next generation of software interfaces.
+
+Code Is Commodity. Art Direction Is the Moat.
+In “The Future of Micro-Niche AI Tools,” I ended with the idea that AI unlocks human creativity rather than replacing it. I still believe that. But I have been thinking about which humans specifically benefit the most from this shift, and I keep arriving at the same unexpected answer.
+What AI Can and Cannot Generate
+AI can generate code. It generates it fast, and for most routine tasks it generates it well enough to ship. AI can generate documentation, test cases, business logic, database schemas, and deployment configurations. Give it a well-written prompt and it will produce working software in minutes.
+What AI struggles with is coherent visual worldbuilding. Not isolated images. Image generation is impressive and getting better every month. The problem is consistency. Creating a visual system where every element feels like it belongs to the same world, where the color palette tells a story, where the spatial layout guides attention, where the emotional tone is deliberate and sustained across every interaction.
+This is not a matter of better training data or larger models. Coherent visual worldbuilding requires the kind of intentional design thinking that comes from understanding how humans experience space, light, color, and emotion simultaneously. It requires the ability to make a hundred small aesthetic choices that all reinforce the same feeling.
+Why Game Artists Have Exactly These Skills
+Video game concept artists, environment designers, character designers, and UI artists have spent decades learning to build immersive, consistent visual systems under extreme constraints. A game environment needs to be beautiful, but it also needs to communicate gameplay information. A character design needs to be distinctive at 20 pixels tall on screen. A UI layout needs to be readable during a fast-paced action sequence.
+These artists work within tight technical budgets (polygon counts, texture memory, frame rate targets) while creating worlds that players spend hundreds of hours inside. That constraint-driven creative process produces a specific kind of skill: the ability to make a limited palette of tools create an emotionally complete experience.
+That skill is exactly what on-demand software needs.
+The Experience Layer
+In the first post of this series, I introduced the concept of “striking an instance.” A user describes what they need, and software gets generated for them. The logic is commodity. The data layer is standardized. The SDLC pipeline ensures reliability.
+But what makes a user actually want to use the tool? What makes them return to it tomorrow instead of generating a different one? The experience layer. The way the interface looks, feels, and responds. The visual consistency that makes a complex tool feel simple. The micro-interactions that make data entry feel less like a chore.
+Most AI-generated interfaces today look like what they are: functional layouts with default styling. They work, but they do not feel intentional. There is no art direction. No visual system. No sense that someone thought about how the colors, typography, spacing, and motion work together to create a specific experience.
+Game artists think in exactly these terms. They call it “visual language” or “art direction,” and it encompasses everything from the macro (overall mood and setting) to the micro (how a button highlights when you hover over it). This is the layer that AI cannot generate from a text prompt, because the prompt would need to encode hundreds of aesthetic decisions that the artist makes intuitively.
+This extends far beyond the gaming industry. Product design for consumer applications, AR and VR interfaces, AI agent front-ends, dashboard visualization, and even the micro-niche tools I have been writing about all benefit from someone who thinks in visual systems.
+Consider the property management tool I am building. The data layer is Markdown in a git repository. The API is FastAPI. The front-end is HTMX. All of that is functional. But the difference between a tool I tolerate and a tool I enjoy using comes down to visual decisions that have nothing to do with the code.
+Does the maintenance request list feel urgent when there are overdue items? Does the financial summary feel trustworthy? Does the contractor assignment flow feel efficient? These are visual and interaction design questions, and the people best equipped to answer them are the ones who have spent careers making digital experiences feel emotionally coherent.
+I come at this from a different angle. My photography practice, heavy on macro, surreal compositions, and pattern recognition, has taught me that visual intentionality changes how people experience information. A data table can communicate the same numbers as a well-designed dashboard, but the dashboard tells a story. That storytelling layer is what game artists bring to every project.
+The Iterative Creative Process
+There is another reason game artists are uniquely positioned for this moment. Their entire workflow is iterative and constraint-driven. A concept artist does not paint a final piece from scratch. They sketch, get feedback, revise, get more feedback, and refine through dozens of iterations within strict technical constraints.
+That is exactly the workflow that AI-assisted creation demands. The human sets the direction, the AI generates options, the human curates and refines, the AI iterates. Game artists have been working this way for decades. The only thing that changed is the tool doing the initial generation.
+What This Means
+As on-demand software proliferates, the differentiator shifts from functionality to experience. Code becomes commodity. Data standards become infrastructure. SDLC becomes automated. What remains is the experience layer: the visual and interaction design that makes software feel like it was made for a human, not generated by a machine.
+The people who know how to create that experience, who think in visual systems, who can maintain aesthetic consistency across complex interactive environments, who work iteratively under tight constraints, are game artists. They have been training for this moment for 30 years.
+If you are building AI-generated tools and wondering why they feel generic, the answer is not better prompts. It is better art direction. And the talent pool for that skill is sitting in studios making virtual worlds, waiting for someone to realize their skills apply far beyond games.
+The 80/20 Rule for AI Code Review
+
+---
+
 ## The 80/20 Rule for AI Code Review
 
 URL: https://philjohnstonii.com/blog/wc9s23btpmv673x8k9ihp15w2b668e
@@ -37,6 +72,7 @@ If you are building AI-assisted workflows, the question is not “can AI replace
 For automated testing, vulnerability scanning, style compliance, and coverage analysis: let the acting experts handle it. They are better at consistency and scale than any human team.
 For design taste, strategic direction, novel risk assessment, and ethical judgment: keep humans in the loop. Not because AI cannot attempt these tasks, but because the cost of getting them wrong is high and the value of getting them right compounds over time.
 The 80/20 split is not a permanent ratio. As models improve, the boundary will shift. But the category of tasks that requires human judgment will not shrink to zero. It will just become more concentrated on the decisions that matter most.
+Code Is Commodity. Art Direction Is the Moat.
 Vibe Coding Got You the Prototype. Now What?
 
 ---
@@ -519,4 +555,4 @@ Book a 15-minute call
 ---
 
 Source: https://philjohnstonii.com
-Last updated: 2026-03-29
+Last updated: 2026-03-30

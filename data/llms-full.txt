@@ -521,7 +521,7 @@ Career Timeline
 2008-2011 - Co-Founder ORCA Digital Solutions
 2008 - BS Computer Science, University of Portland (Entrepreneur Scholar)
 Leadership: Team building (0→team of 10), remote management since 2019, Cross-functional GTM, enterprise and open source partnerships
-AI / ML: AI-SDLC, agentic coding process and principals, RAG content pipelines, prompt engineering, LLM Agentic coding, AI agent frameworks, AI-powered content systems,
+AI / ML: AI-SDLC, agentic coding process and principles, RAG content pipelines, prompt engineering, LLM Agentic coding, AI agent frameworks, AI-powered content systems,
 Developer Relations: AI-optimization, zero-to-one program building, community growth, developer advocacy, technical storytelling, API/SDK evangelism
 Product: API marketplace management, developer experience (DX), cloud platform GTM, KPI definition, roadmap strategy
 Content: Video production (123+ tutorials), technical writing, developer marketing at scale, YouTube channel strategy
@@ -535,18 +535,20 @@ Content at Scale Across my career, I've produced and directed 123+ developer tut
 
 ---
 
-## I help API-first companies build developer programs that drive adoption.
+## AI agents are creating a new distribution channel for dev tools.
 
 URL: https://philjohnstonii.com/consulting
 Summary: Fractional DevRel consulting for API-first companies. Services include Fractional Head of DevRel ($5,000/mo), DevRel Program Audit ($2,500), and AI DevRel Accelerator ($3,500-4,000). Track record with GoPro, HERE Technologies, and 1Password.
 
-I help API-first companies build developer programs that drive adoption.
+AI agents are creating a new distribution channel for dev tools.
+Who is this for?
+For founders, product leads, and marketing leads at API and SDK companies (5-50 employees) who know the buyer is changing but don't have a playbook yet.
 Fractional Head of DevRel
 8 hrs/week ongoing engagement. Strategy, content, developer onboarding, metrics.
 DevRel Program Audit
 One-time deep-dive into existing DevRel efforts. Deliverable: roadmap + recommendations.
 AI DevRel Accelerator
-Implement AI tooling (LLM awareness, tutorial, content) into existing DevRel workflow.
+Make your developer tools discoverable by AI coding agents and LLMs. Includes llms.txt setup, AI-optimized documentation, and a discoverability audit across major AI assistants.
 GoPro : Built program from 0 to 330+ partners (NASA, BMW, Google)
 HERE Technologies : Onboarded 15,000+ developers, grew market 2,250x
 1Password : Established DevRel vision, managed open source program (+900 projects), technical marketing (videos)
@@ -555,4 +557,4 @@ Book a 15-minute call
 ---
 
 Source: https://philjohnstonii.com
-Last updated: 2026-04-01
+Last updated: 2026-04-02

@@ -22,8 +22,12 @@
 - [Micro-niche vibe coding?](https://philjohnstonii.com/blog/micro-niche-vibe-coding): I've been building small terminal UI apps tuned to very specific personal workflows. It's vibe coding at its most practical: making the tools to be more productive, one micro-niche problem at a time.
 - [Phil Johnston, II](https://philjohnstonii.com/resume): Resume of Phil Johnston, II. 15 years in Developer Relations at BMW, GoPro, HERE Technologies, and 1Password. Built the GoPro Developer Program to 330+ partners including NASA and Google. Onboarded 15,000+ developers. Based in Portland, OR.
 - [AI agents are creating a new distribution channel for dev tools.](https://philjohnstonii.com/consulting): Fractional DevRel consulting for API-first companies. Services include Fractional Head of DevRel ($5,000/mo), DevRel Program Audit ($2,500), and AI DevRel Accelerator ($3,500-4,000). Track record with GoPro, HERE Technologies, and 1Password.
+- [Apps — Phil Johnston, II](https://philjohnstonii.com/apps)
+- [SkyWave - Know When to Get On the Air](https://philjohnstonii.com/skywave)
+- [Terms of Service](https://philjohnstonii.com/terms-skywave)
+- [Privacy Policy](https://philjohnstonii.com/privacy-skywave)
 
 ## About
 
 Source: https://philjohnstonii.com
-Last updated: 2026-04-14
+Last updated: 2026-04-15

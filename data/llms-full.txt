@@ -627,5 +627,171 @@ Book a 15-minute call
 
 ---
 
+## Apps — Phil Johnston, II
+
+URL: https://philjohnstonii.com/apps
+
+Johnston Software & Services LLC
+We build focused, well-crafted mobile applications. Based in Portland, Oregon, Johnston Software & Services is a small software studio that believes the best apps do one thing really well.
+SkyWave - HF Radio Propagation
+SkyWave gives amateur radio operators a clear, opinionated answer to the question every ham asks before getting on the air: "Which band should I use right now?"
+Instead of presenting walls of raw solar data, SkyWave evaluates real-time conditions from NOAA Space Weather Prediction Center and KC2G ionospheric data, then delivers a single recommendation you can act on.
+Real-time band recommendations based on solar flux, K-index, MUF, and geomagnetic conditions
+Space weather monitoring with visual gauges and trend charts
+Grey line detection with interactive 3D globe
+Long path propagation analysis
+NVIS evaluation for regional communication
+Situational alerts for rare openings, sporadic E, and geomagnetic storms
+Save multiple locations and compare propagation across them
+Share your conditions with other operators
+Available on iOS and Android.
+Johnston Software & Services LLC is a registered Oregon limited liability company founded in 2026. We are independently owned and operated by Phil Johnston, a licensed amateur radio operator and software developer.
+Our development philosophy is straightforward: build tools that solve real problems for real people. Every feature ships because it earned its place, not because a checklist demanded it.
+
+---
+
+## SkyWave - Know When to Get On the Air
+
+URL: https://philjohnstonii.com/skywave
+
+SkyWave - Know When to Get On the Air
+You earned your license. Now use it.
+Getting your ham radio license is the hard part. Knowing which band to use right now shouldn't be.
+SkyWave watches real-time solar and ionospheric conditions and tells you exactly which HF band to operate on, right now, from your location. No guessing. No staring at raw solar data hoping it means something.
+One clear recommendation. Updated in real time. Built for operators, not data scientists.
+Coming soon: [Apple App Store] [Google Play]
+Every ham has asked the same question
+"Is 20 meters open right now? Should I try 40? What's the K-index even mean for my QTH?"
+You check one website for solar flux. Another for the K-index. A third for MUF data. You cross-reference them in your head, make a guess, key up on a band, and hear nothing.
+There are propagation tools out there. Most of them show you a wall of numbers and expect you to figure out what it means. That works great if you have a Ph.D. in ionospheric physics. For the rest of us, it just feels like staring at a dashboard in a language we're still learning.
+SkyWave does the thinking for you
+Open the app. See your band recommendation. Get on the air.
+SkyWave pulls data from NOAA Space Weather Prediction Center, KC2G ionospheric monitoring, and real-time solar wind measurements. It runs all of it through a propagation engine tuned for HF operators and gives you a single, clear answer: this band, right now, from where you're standing.
+Band Recommendations That Actually Help
+Not just "conditions are fair." SkyWave tells you which specific band is your best bet, with a confidence score and a plain-English explanation of why.
+Tap "Why this band?" and see exactly which factors went into the recommendation. Solar flux, K-index, MUF, time of day, your location. All of it explained in terms that make sense.
+Real-Time Space Weather Dashboard
+Ten solar and ionospheric metrics, updated live, with visual gauges and 6-hour trend charts. Solar flux, K-index, A-index, X-ray flux, geomagnetic field, solar wind, Bz polarity, MUF, foF2, and sunspot number.
+Every metric includes an education card that explains what it is, why it matters, and how it affects your signal. SkyWave doesn't just show you the data. It teaches you what it means.
+Catch Conditions You'd Otherwise Miss
+Propagation windows don't wait for you to check the app.
+Grey Line Detection: Know exactly when the sunrise/sunset terminator crosses your QTH, with a countdown and an interactive 3D globe.
+Sporadic E Alerts: Seasonal and diurnal likelihood scoring so you're ready when 10 meters opens up in June.
+Storm Recovery Tracking: When a geomagnetic storm hits, SkyWave tells you when conditions are likely to recover.
+Aurora Detection: High-latitude operators get a heads-up when auroral propagation is possible.
+NVIS Analysis: See when Near Vertical Incidence Skywave conditions support regional contacts on 40 and 80 meters, with D-layer absorption factored in.
+Long Path Propagation
+Wondering if you can work that DX station on the other side of the planet? SkyWave scores long path viability across multiple bands, shows you the great-circle path on an interactive globe, and ranks your best targets by confidence.
+Two projections: a 3D orthographic globe and a flat azimuthal equidistant map centered on your QTH. The classic ham radio perspective.
+Built for Operators in the Field
+Whether you're activating a park, setting up on a summit, or operating from the backyard, SkyWave works where you are.
+GPS location or manual grid square entry
+Save multiple locations and compare propagation across them
+Callsign lookup auto-fills your grid and license class
+Share your conditions with other operators via a share card with QR code
+Learn While You Operate
+SkyWave was built with new General and Extra class operators in mind. Every screen is an opportunity to learn something about how HF propagation works.
+15+ metrics with plain-English definitions and thresholds
+"Why this band?" breakdowns that connect solar data to your antenna
+Educational content woven into every detail screen, not buried in a help menu
+Pro: Operate Smarter
+Free users get the full band recommendation engine, every metric, all educational content, and dark mode. No artificial walls around learning.
+Pro is for operators who are actively on the air and want real-time intelligence that catches fleeting conditions.
+Pro FeatureWhat It Does For You Smart Alerts Push notifications when your band opens, grey line approaches, or rare conditions appear. Propagation windows are short. Alerts make sure you don't miss them. Auto-Refresh Conditions update every 15 minutes without pulling to refresh. Set it and monitor. Location Override Check propagation from any grid square. Plan your next POTA activation before you drive there. Sparkline Trends See where conditions are heading, not just where they are now. Decide whether to stay on or pack up. Morning Briefing Wake up knowing if today is worth getting on the air. A daily push notification with your personalized band outlook. Unlimited History Track your conditions over weeks and months. Spot patterns. Correlate with your logbook. Unlimited Locations Home station, club, field locations. Switch between them instantly. QRP Scoring Fine-tuned operating windows optimized for low-power work. Golden Hours Know exactly when your best operating windows are today, based on your style and location.
+Is SkyWave free? Yes. The free tier includes the full band recommendation engine, all ten solar metrics, every educational card, dark mode, and manual refresh. You can use SkyWave without paying anything and still get real value.
+What does Pro add? Push notifications for band openings and conditions, auto-refresh, location override for field planning, sparkline trends, morning briefing, and unlimited history and saved locations. Pro is for operators who want real-time alerts and planning tools.
+Where does the data come from? NOAA Space Weather Prediction Center for solar and geomagnetic data. KC2G for real-time ionospheric measurements (MUF/foF2). HamDB for callsign lookups. All data flows through our Cloudflare proxy with tiered caching to stay current without hammering the sources.
+Does SkyWave work offline? SkyWave needs an internet connection to fetch current conditions. Cached data stays available briefly if you lose connectivity. Expanded offline support for field operators is on the roadmap.
+What about VHF and 6 meters? Coming in a future update. The current version focuses on HF bands (160m through 10m).
+I'm a new ham. Will I understand this app? That's exactly who we built it for. Every metric and recommendation includes a plain-English explanation. You don't need to know what the K-index is before you open SkyWave. You'll learn it by using the app.
+What platforms are supported? iOS and Android.
+Built by Johnston Software & Services LLC , Portland, Oregon.
+SkyWave is not affiliated with NOAA, ARRL, or any amateur radio organization. Solar and ionospheric data is provided by NOAA SWPC and KC2G. Propagation recommendations are estimates based on current conditions and should not be relied upon as guarantees of radio communication.
+
+---
+
+## Terms of Service
+
+URL: https://philjohnstonii.com/terms-skywave
+
+Terms of Service
+Johnston Software & Services LLC Effective Date: April 14, 2026
+These terms of service ("Terms") govern your use of the SkyWave mobile application ("the App") provided by Johnston Software & Services LLC ("we," "us," or "our"). By using the App, you agree to these Terms.
+The App provides real-time HF radio propagation information and band recommendations for licensed amateur radio operators and enthusiasts. The App is intended for informational and educational purposes.
+You agree to use the App only for lawful purposes and in accordance with these Terms.
+Accuracy and Disclaimers
+The App provides propagation estimates and band recommendations based on data from third-party sources including NOAA Space Weather Prediction Center, KC2G, and HamDB. While we strive for accuracy:
+Propagation conditions are inherently variable and unpredictable. Recommendations are estimates, not guarantees.
+Data from third-party sources may be delayed, incomplete, or temporarily unavailable.
+The App is not a substitute for your own judgment as a radio operator.
+THE APP IS PROVIDED "AS IS" AND "AS AVAILABLE" WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+Subscriptions and Purchases
+Some features of the App require a paid subscription ("Pro"). Subscriptions are processed and managed through the Apple App Store or Google Play Store. All purchases are subject to the terms of the respective app store.
+Subscription pricing and terms are displayed in the App before purchase.
+Refunds are handled by the Apple App Store or Google Play Store according to their refund policies.
+We reserve the right to change subscription pricing. Changes will not affect active subscription periods.
+Intellectual Property
+The App, including its design, code, content, and branding, is the property of Johnston Software & Services LLC. You may not copy, modify, distribute, or reverse-engineer any part of the App.
+Amateur radio data, space weather information, and propagation data sourced from NOAA, KC2G, and HamDB remain the property of their respective owners.
+Limitation of Liability
+To the maximum extent permitted by law, Johnston Software & Services LLC shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the App, including but not limited to:
+Inaccurate propagation recommendations
+Loss of data stored on your device
+Interruption of service due to third-party data source outages
+Any action taken based on information provided by the App
+Our total liability for any claim arising from use of the App shall not exceed the amount you paid for the App in the twelve months preceding the claim.
+We reserve the right to discontinue the App or any of its features at any time. You may stop using the App at any time by uninstalling it from your device.
+Changes to These Terms
+We may update these Terms from time to time. Changes will be posted on this page with an updated effective date. Continued use of the App after changes constitutes acceptance of the updated Terms.
+These Terms are governed by the laws of the State of Oregon, United States, without regard to conflict of law provisions.
+If you have questions about these Terms, contact us at:
+Johnston Software & Services LLC PO Box 230614 Tigard, OR 97281
+Or visit: philjohnstonii.com/contact
+
+---
+
+## Privacy Policy
+
+URL: https://philjohnstonii.com/privacy-skywave
+
+Johnston Software & Services LLC Effective Date: April 14, 2026
+This privacy policy describes how Johnston Software & Services LLC ("we," "us," or "our") collects, uses, and protects information when you use the SkyWave mobile application ("the App").
+Information We Collect
+Information You Provide
+Callsign: If you enter your amateur radio callsign, we use it to look up your Maidenhead grid square and license class via the HamDB API. Your callsign is sent to HamDB (hamdb.org) for this lookup.
+Location: If you choose to share your GPS location or enter a grid square manually, we use this to calculate propagation conditions for your area. You can use the App without sharing your location by entering a grid square manually.
+Saved Locations: Any additional locations you save are stored locally on your device.
+Information Collected Automatically
+Analytics and Crash Reports: We use Google Firebase Analytics and Firebase Crashlytics to collect anonymized usage data and crash reports. This helps us understand how the App is used and fix problems. Firebase may collect device type, operating system version, app version, and general usage patterns. Firebase Analytics data is not linked to your identity. For more information, see Google's Privacy Policy .
+Information We Do Not Collect
+We do not collect your name, email address, phone number, or payment information directly. Purchases are handled entirely by the Apple App Store or Google Play Store.
+We do not collect precise GPS coordinates on our servers. Location data is used on-device to determine your grid square for propagation calculations.
+We do not create user accounts or require login.
+How We Use Your Information
+To calculate and display real-time radio propagation conditions for your location
+To look up your grid square and license class from your callsign (via HamDB)
+To fetch space weather data from our Cloudflare Worker proxy, which retrieves data from NOAA Space Weather Prediction Center and KC2G
+To improve the App through anonymized analytics and crash reporting
+Third-Party Services
+The App connects to the following third-party services:
+ServiceData SentPurposeHamDB (hamdb.org)CallsignGrid square and license class lookupCloudflare Worker (our proxy)Grid squareFetches NOAA SWPC and KC2G dataFirebase Analytics (Google)Anonymized usage dataApp improvementFirebase Crashlytics (Google)Crash logs, device infoBug fixing
+We do not sell, rent, or share your personal information with any third parties for marketing or advertising purposes.
+Data Storage and Security
+Callsign, grid square, and saved locations are stored locally on your device.
+Analytics and crash data are stored by Google Firebase according to their data retention policies.
+We do not maintain a database of user information on our servers.
+Children's Privacy
+The App is intended for users aged 13 and older. We do not knowingly collect personal information from children under 13. If you believe a child under 13 has provided us with personal information, please contact us and we will delete it.
+You can use the App without entering a callsign or sharing your location.
+You can opt out of Firebase Analytics by disabling analytics collection in your device settings.
+You can delete all locally stored data by uninstalling the App.
+Changes to This Policy
+We may update this privacy policy from time to time. Changes will be posted on this page with an updated effective date. Continued use of the App after changes constitutes acceptance of the updated policy.
+If you have questions about this privacy policy, contact us at:
+Johnston Software & Services LLC PO Box 230614 Tigard, OR 97281
+Or visit: philjohnstonii.com/contact
+
+---
+
 Source: https://philjohnstonii.com
-Last updated: 2026-04-14
+Last updated: 2026-04-15

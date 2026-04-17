@@ -4,6 +4,118 @@
 
 ---
 
+## /insights report
+
+URL: https://philjohnstonii.com/blog/insights-report
+Summary: I asked Claude Code to run a usage report on my Claude Code sessions from the last two weeks.    Around 200 sessions, 235 hours   , across game dev, mobile apps, multi-agent tooling, and infrastructure. I'm publishing the redacted version because it's a useful snapshot of how one person is actually working with AI coding agents in 2026, and because if you sell dev tools, your buyer might look more like this than you think.
+
+/insights report
+I asked Claude Code to run a usage report on my Claude Code sessions from the last two weeks. Around 200 sessions, 235 hours , across game dev, mobile apps, multi-agent tooling, and infrastructure. I'm publishing the redacted version because it's a useful snapshot of how one person is actually working with AI coding agents in 2026, and because if you sell dev tools, your buyer might look more like this than you think.
+Three things worth flagging before you read it:
+The "developer" in this report barely writes code by hand. I work top-down. PRDs get decomposed into dependency-linked issues, multi-persona reviews happen before implementation, then agent swarms ship the work. Claude Code is less pair programmer, more fleet commander. Your next wave of adopters is evaluating your tool through an agent, not by reading your quickstart.
+Most of my friction is in the orchestration layer, not the code. Race conditions between parallel agents claiming the same ticket. Output token limits cutting off mid-batch. OAuth expiring inside Docker containers. These are the real problems once you scale one human to many agents.
+What I'm building on the back of this:
+A self-coordinating agent dispatch system with atomic ticket claims and auto-rebase
+An end-to-end PRD-to-shipped-feature pipeline triggered by a single command
+Test-harness-driven loops where agents iterate against real app states until a spec passes
+If you run an API or SDK company and this pattern of work is showing up in your own usage data, that's the shift I help companies navigate. Reach out at philjohnstonii.com if you want to compare notes.
+The full report is below.
+Session summary: ~200 sessions over ~2 weeks, ~235 hours of work across a mix of game development, mobile app work, multi-agent dispatch tooling, and infrastructure.
+What's working: I operate top-down and spec-first. PRDs get decomposed into dependency-linked sub-issues, multi-persona reviews happen before code, and then agent swarms ship the work. Examples: a game project decomposed from a large PRD into enriched sub-issues and shipped via parallel agents, and a mobile app feature rollout delivered via TDD with hundreds of passing tests.
+What's hindering: On Claude's side, multi-agent dispatch has race conditions (duplicate claims, merge conflicts, stale labels), and output-token limits silently truncate responses mid-batch. On my side, Docker and auth friction blocks work before it starts (OAuth expirations, missing container tools, CLI auth passthrough), and long batch jobs aren't checkpointed, so hitting a usage window mid-run wastes real progress.
+Quick wins: Hooks to enforce a pre-claim verification step on ticket-loop workflows (atomic label claim + already-done check) so duplicate-claim rates drop without babysitting. Lean into headless mode for batch enrichment passes: invoke Claude per-item from a shell loop so each issue is its own checkpointed unit rather than one giant session.
+Ambitious workflows: As models get stronger, the orchestration layer becomes the leverage point. Chain PRD decomposition → multi-persona review → ticket-loop → test-harness verification into one command. Invest now in making harness profiles and assertions machine-readable so agents can close the loop themselves.
+Interaction Style
+I operate at a high level of orchestration. Claude Code is less like a pair programmer and more like a fleet commander. Sessions are dominated by multi-agent dispatch workflows: ticket-loop prompts, parallel agents, concurrent PR shipping. I think in terms of skills, workflows, and reusable infrastructure. When I play Snake, I don't just want to win, I want a reusable script and agent guide afterward.
+I tend toward detailed upfront specs followed by long autonomous runs. I let Claude work extensively (sessions frequently hit usage window limits mid-batch), and I'm comfortable with brainstorm → spec → plan → implement pipelines. But I'm not passive. I interrupt decisively when Claude drifts off-course. When Claude pushed clarifying questions instead of acting, I redirected. The friction pattern shows "wrong approach" as my top friction: I course-correct based on approach mismatches, not bugs.
+I'm remarkably tolerant of infrastructure friction and treat it as part of the work. A large chunk of sessions are meta-work: making the harness work, making plugins work in Docker, making CLIs authenticate inside containers. Satisfaction stays high even when sessions get cut short, suggesting I view these as expected costs of running at scale rather than failures.
+Key pattern: A systems orchestrator who specs thoroughly, dispatches autonomous agent fleets, and intervenes surgically only when the approach drifts. Claude Code is infrastructure to be tuned, not a tool to be driven.
+Parallel agent ticket dispatch. Built and iteratively hardened a system for dispatching concurrent agents to ship tickets autonomously. When race conditions caused duplicate claims, I didn't abandon the approach: I added claim detection, label-based coordination, and case-insensitive filtering to harden the skill.
+Spec-driven PRD decomposition. Work top-down from PRDs to structured execution: large PRD → dependency-linked sub-PRDs → enriched with PM and designer passes. The discipline of separating design, planning, and execution phases is why multi-agent workflows actually land.
+Test harness and QA tooling. Rather than debugging reactively, I invested in building a Dart shelf-based test harness with profiles, shortcuts, screenshot paste, and guided walkthroughs to validate app states.
+Friction Analysis
+Multi-agent coordination race conditions
+When parallel agents ship tickets, they step on each other because claim detection is weak. Stronger locking (atomic label claims, check-before-work guards) upfront would prevent wasted cycles.
+Session and output limits interrupting long workflows
+Repeatedly hit usage windows and output-token caps mid-task on batch operations that can't easily resume. Breaking work into smaller checkpointed chunks or front-loading critical output would reduce lost progress.
+Environment and authentication blockers
+Docker-heavy setup combined with OAuth token expiration repeatedly blocks work before it starts. Pre-flight auth checks and building missing tools into the container image would eliminate recurring dead-ends.
+CLAUDE.md additions
+Ticket-loop workflow
+Always check for existing claim comments and already-shipped status before starting work
+Use case-insensitive label filters in jq queries
+Never force-remove worktrees without checking for active agent sessions
+After shipping a PR, verify labels applied and check for merge conflicts with siblings
+Docker environment constraints
+Document missing tools (pbcopy, poppler-utils, etc.) so Claude handles them proactively
+Use stable ports for services exposed from the container
+Host paths from plugins may need compatibility symlinks
+Response length
+Keep individual responses concise; output token limits cause API errors mid-task
+For large batch work, break into smaller commits or checkpoint progress so a truncated response doesn't lose work
+Features to try
+FeatureWhy it fitsCustom skillsAlready used heavily. Add a /ship-pr skill bundling ship-branch logic with label/claim/merge-conflict checks.HooksA PostToolUse hook running a formatter on edited files prevents whitespace friction. PreToolUse could block worktree force-removal when an agent lock exists.Headless modeConcurrent ticket-dispatch is exactly what this is built for. Replacing CLI-in-Docker auth complexity with claude -p could eliminate 401 errors and simplify the pipeline.
+Checkpoint long batch work. Write a progress file after each item so resumption is trivial when usage windows reset.
+Verify before claiming in multi-agent flows. Pre-claim verification step: re-fetch issue, check for closed linked PRs, check for recent claim comments, only then post claim.
+Spec Docker image needs up front. Keep a single requirements list of every tool the container must have, updated whenever a gap is found.
+Self-coordinating parallel agent swarms
+Eliminate duplicate-claim race conditions and merge conflicts by building a true coordination layer where agents atomically claim tickets, detect overlapping file touches before starting, and auto-rebase. Scale from a handful of PRs per loop to many more without supervising.
+Autonomous PRD-to-shipped-feature pipeline
+Chain existing skills (PRD decomposition, ticket-loop, test-harness, architecture-review) into one autonomous pipeline: drop in a PRD, agents decompose it, run multi-persona reviews, dispatch implementation agents with TDD, auto-verify via the harness, and merge, triggered by a single command.
+Test-harness-driven iteration loops
+The Dart shelf harness is the foundation for a closed-loop system where agents iterate against real app states until behavior matches a spec. Agent gets a bug report, reproduces it via a harness profile, writes a failing test, iterates while watching screenshots, and only stops when visual and functional assertions pass.
+Claude played Snake by BFS until it scored a perfect 10/10, after first dying repeatedly due to MCP latency. In a playful session, I asked Claude to play Snake. Initial attempts using MCP tools had too much roundtrip latency, so the snake kept dying. Claude pivoted to direct socket communication with per-step BFS replanning, achieved a perfect game, then packaged it up as a reusable script and agent guide.
+Stop Letting Your AI Agents Be Generalists
+
+---
+
+## Stop Letting Your AI Agents Be Generalists
+
+URL: https://philjohnstonii.com/blog/stop-letting-your-ai-agents-be-generalists
+Summary: I've been building two apps with AI agents doing most of the heavy lifting. One is a ham radio propagation tool for iOS. The other is a game for my daughter. Both started the same way: I gave the agent a prompt, it built something, and the result was fine. Just fine. Functional, forgettable, and looking like every other AI-generated app out there. Then I changed one thing, and the entire quality of the output shifted…
+
+Stop Letting Your AI Agents Be Generalists
+I've been building two apps with AI agents doing most of the heavy lifting. One is a ham radio propagation tool for iOS. The other is a game for my daughter. Both started the same way: I gave the agent a prompt, it built something, and the result was fine. Just fine. Functional, forgettable, and looking like every other AI-generated app out there. Then I changed one thing, and the entire quality of the output shifted.
+I gave my agents real opinions.
+The first version was boring
+When I started building the propagation app, I used a product manager agent to define features and a coding agent to implement them. The output worked. It ran. But it looked and felt like a default template with data plugged in. There was nothing distinctive about it. No personality, no point of view.
+The problem wasn't the agents' technical ability. They could write code, structure data, and follow instructions. The problem was that nobody in the process had taste. Nobody was saying "no, that violates a principle I care about." The agents were doing what I asked, but they weren't pushing back on whether what I asked was actually good.
+Giving agents a real point of view
+I started researching designers who had strong, documented philosophies about how things should look and feel. I landed on Dieter Rams's "less but better" approach. I used deep research to pull together everything about their philosophy, their principles, their famous quotes about form and function. Then I built a custom skill (a persistent personality and expertise profile that shapes how an agent thinks and responds) based on all of that.
+When I ran the app through this new design agent, the entire application changed. It wasn't just a different color scheme or font choice. The structure of screens changed. The hierarchy of information changed. The agent was making decisions based on a coherent philosophy, not just best practices from a training dataset.
+But here's the part that surprised me. The design agent started pushing back on the product manager agent. The product manager would propose a feature, and the design agent would say "no, this violates my principles, and here's why." That tension produced better decisions than either agent made on its own.
+The mixture that actually works
+That experience led me to build a mixture of experts. Not the machine learning concept with the same name. More like assembling a small team of opinionated specialists who each bring a distinct perspective to the project.
+For the propagation app, the team looks like this:
+The product manager. This agent is intentionally vanilla. No strong aesthetic opinions. It focuses on market viability, feature prioritization, and whether something will increase the addressable audience. It builds the PRD (the blueprint document that defines what gets built and why) and sizes the opportunity.
+The designer. This is the opinionated one. For the propagation app, I eventually switched from Dieter Rams's philosophy to one inspired by Jony Ive, whose work at Apple focused on products that feel warm and human. The app went from austere and functional to something people actually responded to when I showed it around. Higher engagement, more positive reactions, same audience.
+The editor and domain expert. This agent knows ham radio. It reviews every piece of text, every label, every tooltip to make sure the words resonate with the target audience. It also weighs in on whether features actually serve what operators need, not just what looks good on a spec sheet.
+Three perspectives. When two disagree, the third breaks the tie. There's never a deadlock.
+The pipeline in practice
+Here's how it actually flows. The product manager creates the PRD. A separate process breaks that PRD into smaller sub-PRDs, each one scoped to a specific piece of the app (a single screen, a feature, a data flow). Then the mixture of experts reviews each sub-PRD. The designer weighs in on experience. The editor checks messaging and domain accuracy. The product manager defends the business case.
+Once the experts have shaped each sub-PRD, the system generates individual development tickets (discrete work items a coding agent can pick up and execute). Every agent picking up a ticket has the full context of what the experts decided and why.
+From the product manager's first PRD to tickets landing in the queue, the whole process takes about two to three hours. That's not days of meetings and slide decks. That's a few hours of agents arguing with each other and producing better specs because of it.
+What I learned from the game
+The game for my daughter followed a similar pattern but taught me something different. The first version failed. Not because of bad code, but because the scope kept shifting. My daughter didn't know exactly what she wanted at the start, and as development went on, every conversation changed the direction. The app became impossible to maintain.
+For the second attempt, I locked the scope. The product manager reverse-engineered the failed codebase into a proper PRD. I reviewed it, approved it, and told my daughter: this is what gets built. If you have new ideas, write them down and we'll look at them after the first version ships.
+She pushed back at first. But once I gave her a shared note to capture ideas for later, she was fine with it. Those notes become formal change requests after delivery, not mid-flight pivots.
+For the game's design agent, I went with Toby Fox, the creator of Undertale and Deltarune. He handles the full picture: art, audio, mechanics, theme, and feeling. Not a specialist in one narrow area, but a generalist with strong opinions about all of it. That was key. Too many specialists means too many handoffs and too many gaps between disciplines.
+Why this matters if you sell developer tools
+Here's the part most people miss. My daughter is not a developer. She can't write code. But she directed an AI agent to build a working game, gave feedback on iterations, and shaped the final product. She was the decision-maker in a software development process without writing a single line.
+This is exactly what's happening across the industry right now. Non-technical founders, product managers, and business owners are using AI agents to build, evaluate, and select software. The definition of "developer" is expanding fast. People who never would have touched your API or SDK directly are now discovering and adopting tools through their agents.
+If you sell an API, SDK, or developer platform, your buyer persona just got a lot wider. The agent doing the building is choosing your tool (or your competitor's) based on what it knows, what it can find, and how well your product fits into the workflow. The human directing that agent may not know what an SDK is, but they're the one deciding what gets built.
+Companies that figure out how to reach this new buyer, not just the traditional developer, are going to capture a distribution channel that barely existed two years ago.
+The real takeaway
+If you're building anything with AI agents, the biggest upgrade you can make isn't better prompts or faster models. It's giving your agents a point of view worth defending.
+Base them on opinionated people. Real designers, real product thinkers, real domain experts. Build their principles into the skill so deeply that the agent will argue with other agents when those principles get violated.
+The tension is the feature. When a design agent tells a product manager "no, that's wrong, and here's the principle it violates," that's not a bug in your process. That's the moment where your product gets better.
+And if you're running a dev tool company, pay attention to who's making these decisions. It's not just senior engineers anymore. It's anyone with access to an AI agent and a problem to solve. Your go-to-market strategy needs to account for both.
+Confidence labels: All claims in this post are based on FACT from Phil's direct experience building these projects. The section on dev tool distribution is INFERRED from these experiences combined with observed industry trends.
+/insights report
+Fresh Eyes: How I Got Past My Agent's Quality Ceiling
+
+---
+
 ## Fresh Eyes: How I Got Past My Agent's Quality Ceiling
 
 URL: https://philjohnstonii.com/blog/fresh-eyes-how-i-got-past-my-agents-quality-ceiling
@@ -30,6 +142,7 @@ The pattern is simple. When output from my agent workflows plateaus, I open a fr
 The goal isn't to replace my existing stack. It's to get a second opinion from something that isn't trapped in my thinking. Once the fresh agent identifies gaps or new approaches, I bring those insights back into my main workflow. The existing agents do the implementation. The fresh agent just tells me what I'm missing.
 I'm running the same technique on a second widget now, this one for solar flux data. If the pattern holds across both cases, it's not a one-off. It's a repeatable step in the process.
 The broader point is this: the agents I've trained on my project know a lot about my project. But they also know too much about my version of it. Sometimes the most productive thing I can do is talk to someone who's never heard of it.
+Stop Letting Your AI Agents Be Generalists
 My Agentic Coding Stack: How I Ship Software With AI Agents
 
 ---
@@ -794,4 +907,4 @@ Or visit: philjohnstonii.com/contact
 ---
 
 Source: https://philjohnstonii.com
-Last updated: 2026-04-16
+Last updated: 2026-04-17

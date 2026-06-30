@@ -45,6 +45,7 @@ The buyer in front of your product is changing. The same person who would have b
 That's not a threat to every category of dev tool. But it's a threat to any category where the value was "we packaged this knowledge for you." The agent now packages knowledge on demand, for one user, for one job.
 If you sell to developers, the question worth sitting with is: what's left of your value once the buyer can build the version they actually want, in an afternoon, for free?
 I crammed Python in two days with a tool I built that morning. That's not the interesting part. The interesting part is that this is normal now, and most products were not designed for buyers who can do that.
+The Best Software I Use Has One User
 /insights report
 
 ---
@@ -961,4 +962,4 @@ Phil spends much of his free time on familial duties, but when downtime allows, 
 ---
 
 Source: https://philjohnstonii.com
-Last updated: 2026-06-29
+Last updated: 2026-06-30

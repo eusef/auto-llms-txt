@@ -4,6 +4,29 @@
 
 ---
 
+## The Best Software I Use Has One User
+
+URL: https://philjohnstonii.com/blog/the-best-software-i-use-has-one-user
+
+The Best Software I Use Has One User
+Open the weather app on my phone and a cloudy forecast looks like a warning. Gray icon, maybe a raindrop, the quiet suggestion that I should stay home. But for the photograph I am actually trying to make, that cloudy day is the entire point. Clouds catch light. They turn a flat sky into the reason you drove an hour before sunrise. The app and I are looking at the same forecast and reading two completely different stories.
+That gap bothered me for years, and it turns out the gap is the interesting part.
+Every weather app is built to answer one question: will you be comfortable today, and will you get wet. That is a reasonable question. It is the question almost everyone has. So the apps optimize for it, and they are good at it. The trouble is that when I am planning a landscape shoot, that is not my question at all. My question is closer to "will the light be good at this specific spot, and exactly when." Cloud cover, the angle of the sun, the window around sunrise when everything goes gold. None of the apps could express that, because none of them were built for it. They were built for the median person. I am not the median person, at least not at 4am with a camera bag by the door.
+For most of the history of software, that was simply the end of the story. If your need was too specific for a product to serve, you were stuck. You learned to translate the generic tool in your head, or you went without. Nobody was ever going to build an app for the exact intersection of "landscape photographer," "obsessed with cloud cover at golden hour," and "shoots the Oregon coast." That market is one person. It is me. Building software for a market of one made no economic sense, so it did not happen.
+That math just changed, and I want to be precise about how.
+A couple of weeks ago I built the tool I had been wishing for. It took two days. It is called Shotcast, it is live, and anyone can use it: https://shotcast.phils.pics . It pulls the position and timing of the sun so I know when golden hour actually happens where I am standing, not in some generic city nearby. It pulls the weather data that matters for light, like how much cloud cover to expect. It shows me the few things I need to decide one thing: is it worth the drive. It has a button to switch between Celsius and Fahrenheit, because I wanted one and there was no product committee to argue with about it. The point of Shotcast is not that it is polished. The point is that it answers my question, the one no company was ever going to build for.
+Here is the part that took me years of building developer tools to actually see.
+The hard part of making Shotcast was not the code. I work with AI coding agents every day, which is to say software that can write and edit a program when you describe what you want, and the agents wrote most of it. The hard part was knowing, exactly, what I wanted. I had to be able to say it plainly: show me cloud cover and the timing of golden hour for this location, in these units, in this order, because this is the decision I am making and these are the inputs to it. That sentence is the real product. The code is just downstream of the sentence.
+So the thing standing between you and software built for your own niche is no longer engineering. It is articulation. The bottleneck moved. For decades the question was "can you write the program." Now the question is "can you describe it well enough that the machine can."
+I want to be honest about the catch, because I am not interested in selling anyone a fantasy. You still need enough technical fluency to know what is possible and to steer when the agents wander off, and they do. I have a computer science degree and I have been building this kind of thing for a living for a long time. The bar is dropping fast, but it is not zero. What has changed is which bar you have to clear. It used to be "can you build the software yourself." Now it is "can you say what you mean precisely enough." Those are very different bars, and far more people can clear the second one than the first.
+This is what I keep turning over in my head.
+For as long as software has existed, there has been a long tail of human needs that no product ever reached. The needs too specific, too small, too odd to be a market. You either bent yourself around the generic tool or you did without. That long tail is starting to get a floor underneath it. The needs that were too small to be a business are now big enough to be worth one person's weekend. A market of one used to be unservable. Now it is servable, one person at a time, by the person who has the need.
+And that quietly widens who gets to build software at all. The person closest to a problem, the one who understands it well enough to describe it cleanly, is increasingly the person who makes the tool for it. Not because they learned to code in the old sense, but because describing the problem clearly is now most of the job. That is not the end of products. Products still win when a need is shared by millions. It is a new bottom layer forming underneath them, in all the places products were never going to go.
+I still use a normal weather app to decide whether to bring a jacket. It is good at the question almost everyone is asking. But when I am deciding whether the light will be worth the drive to the coast before dawn, I use the one I built. It has exactly one user. That is the whole point.
+I Built a Throwaway Tool to Cram Python in Two Days. The Lesson Wasn't About Python.
+
+---
+
 ## I Built a Throwaway Tool to Cram Python in Two Days. The Lesson Wasn't About Python.
 
 URL: https://philjohnstonii.com/blog/i-built-a-throwaway-tool-to-cram-python-in-two-days-the-lesson-wasnt-about-python
@@ -962,4 +985,4 @@ Phil spends much of his free time on familial duties, but when downtime allows, 
 ---
 
 Source: https://philjohnstonii.com
-Last updated: 2026-07-02
+Last updated: 2026-07-03

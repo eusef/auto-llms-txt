@@ -4,6 +4,38 @@
 
 ---
 
+## An Audience of Two: What a Weekend App Taught Me About Software Economics
+
+URL: https://philjohnstonii.com/blog/an-audience-of-two-what-a-weekend-app-taught-me-about-software-economics
+
+An Audience of Two: What a Weekend App Taught Me About Software Economics
+This weekend I'm taking my son to G-Fest , a kaiju convention (giant monsters, Godzilla, that whole world) held outside Chicago. Three days, dozens of panels, and a schedule handed to you as a PDF. Instead of squinting at that PDF on my phone all weekend, I built us our own app to navigate it. The whole thing took about three hours, and it reminded me of the last time I did almost exactly this. That time, it took a company several weeks and cost me real money.
+What I built for G-Fest
+The convention's schedule comes as a PDF. Fine for printing, rough for finding "what's happening in the next 30 minutes near me" while you're standing in a crowded hallway with a kid who wants to see the guy in the suit.
+So I handed the schedule to my product manager agent. If you haven't worked with AI agents yet, think of it as an assistant you can give a real task to, one that goes off and does the work instead of just answering a question. We spec'd out a small app together: what it needs to do, what it doesn't, how it should feel to use on a phone mid-convention. Then I had the PDF reverse-engineered into a clean data file the app could actually read, and handed the build to my engineering agent.
+The result, which lives at gfest.phils.pics , is a PWA: a web app that installs on your phone like a normal app and works offline, which matters when convention WiFi is fighting a hall full of people. It shows the schedule, lets us filter to what we care about, and works without a signal. You can go look at it, though there's not much point unless you happen to be one of the two of us it was built for. Audience of two: me and my son. That's the entire user base, and that's the point.
+It came together over about three hours of working with my agents, and I'm at the publishing step now. Not a product. Not a company. A tool for one weekend and two people.
+The last time I did this
+Years ago, in my BMW days, part of my job was coordinating executive presence at CES, the enormous consumer electronics show in Las Vegas. Executives with packed, shifting schedules. Hundreds of sessions and meetings and appearances to track. Everything needed to be personalized, in one place, and reliable.
+So we did the sensible thing for the time: we licensed an event-planning application from a company that built exactly this. Then we spent weeks with their team importing the schedules, loading every session and event, and personalizing all of it for BMW. It was, by my memory, hundreds of hours of coordinated work, and it came with a real budget attached.
+I want to be clear: that was the right call. In that era, the capability simply did not exist any other way. You could not build bespoke, personalized event software over a weekend, so you paid people who already had. The money bought something genuinely hard to make.
+What actually changed
+Here's the part worth sitting with. It's not that software got a little cheaper. The shape of the economics changed.
+Look at where the weeks actually went. We licensed a capable app, but that was the starting point, not the finish line. We had very specific requirements, well beyond what the app did out of the box, and the real work was the vendor bending their software to meet them: taking our schedules, our people, our event, and personalizing all of it to a standard the base product was never built for. That custom work was the moat. It was the reason the price made sense.
+That work is now the cheap part. Importing a schedule, structuring the data, personalizing it, deploying it to a phone, all of it collapsed into a few hours of directing agents. When the expensive, custom, human-hours part of building software approaches zero, the old logic of "buy the generic product and pay a team to customize it for you" stops being obviously correct. For a use case like mine, the value that whole engagement was built on didn't just shrink. It collapsed. You no longer need a dedicated company spinning up one-off applications for events and the like. That work now sits well within reach of one person who knows their way around an agentic coding harness and has a working grasp of how software gets built.
+The part most people miss
+I am not a production software engineer. I've said that plainly for years. I didn't write the code that runs on my phone this weekend. I described what I wanted, made the product decisions, and directed two agents to do the building.
+Right now, doing that still goes easier if you have some feel for how software gets built. But treat that as a temporary requirement, not a permanent one. That bar is dropping fast, and it is dropping toward zero. Soon it won't be a bar at all.
+That's the shift I keep pointing dev tool companies toward. The person who used to buy this kind of software is now the person who builds it, and that person is less and less defined by whether they write code. The word "developer" is quietly expanding to include people like me, and the amount of technical background it takes to join that group is shrinking every month.
+If you sell developer tools, both ends of your market are moving. Who discovers and evaluates your product is changing, and so is the calculation of whether to buy software at all versus have an agent build a good-enough version in an afternoon.
+Not everything should be built this way. The magic of my G-Fest app is exactly that it's disposable: two users, one weekend, no roadmap, no support burden. That's a very different thing from software a business depends on.
+But if your product's core pitch was "we'll do the tedious custom work so you don't have to," that pitch is worth revisiting, because the tedious custom work got a lot cheaper this year. The good news, and I mean this, is that the same shift making old moats leaky is handing everyone a brand new way to build. I just used it to make sure my son and I don't miss the costume contest.
+G-Fest: https://www.g-festcon.com
+The app: https://gfest.phils.pics
+The Best Software I Use Has One User
+
+---
+
 ## The Best Software I Use Has One User
 
 URL: https://philjohnstonii.com/blog/the-best-software-i-use-has-one-user
@@ -23,6 +55,7 @@ This is what I keep turning over in my head.
 For as long as software has existed, there has been a long tail of human needs that no product ever reached. The needs too specific, too small, too odd to be a market. You either bent yourself around the generic tool or you did without. That long tail is starting to get a floor underneath it. The needs that were too small to be a business are now big enough to be worth one person's weekend. A market of one used to be unservable. Now it is servable, one person at a time, by the person who has the need.
 And that quietly widens who gets to build software at all. The person closest to a problem, the one who understands it well enough to describe it cleanly, is increasingly the person who makes the tool for it. Not because they learned to code in the old sense, but because describing the problem clearly is now most of the job. That is not the end of products. Products still win when a need is shared by millions. It is a new bottom layer forming underneath them, in all the places products were never going to go.
 I still use a normal weather app to decide whether to bring a jacket. It is good at the question almost everyone is asking. But when I am deciding whether the light will be worth the drive to the coast before dawn, I use the one I built. It has exactly one user. That is the whole point.
+An Audience of Two: What a Weekend App Taught Me About Software Economics
 I Built a Throwaway Tool to Cram Python in Two Days. The Lesson Wasn't About Python.
 
 ---
@@ -985,4 +1018,4 @@ Phil spends much of his free time on familial duties, but when downtime allows, 
 ---
 
 Source: https://philjohnstonii.com
-Last updated: 2026-07-09
+Last updated: 2026-07-10

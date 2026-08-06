@@ -843,26 +843,26 @@ Book a 15-minute call
 
 ---
 
-## Apps — Phil Johnston, II
+## Johnston Software & Services, LLC
 
 URL: https://philjohnstonii.com/apps
 
-Johnston Software & Services LLC
-We build focused, well-crafted mobile applications. Based in Portland, Oregon, Johnston Software & Services is a small software studio that believes the best apps do one thing really well.
-SkyWave - HF Radio Propagation
-SkyWave gives amateur radio operators a clear, opinionated answer to the question every ham asks before getting on the air: "Which band should I use right now?"
-Instead of presenting walls of raw solar data, SkyWave evaluates real-time conditions from NOAA Space Weather Prediction Center and KC2G ionospheric data, then delivers a single recommendation you can act on.
-Real-time band recommendations based on solar flux, K-index, MUF, and geomagnetic conditions
-Space weather monitoring with visual gauges and trend charts
-Grey line detection with interactive 3D globe
-Long path propagation analysis
-NVIS evaluation for regional communication
-Situational alerts for rare openings, sporadic E, and geomagnetic storms
-Save multiple locations and compare propagation across them
-Share your conditions with other operators
-Available on iOS and Android.
-Johnston Software & Services LLC is a registered Oregon limited liability company founded in 2026. We are independently owned and operated by Phil Johnston, a licensed amateur radio operator and software developer.
-Our development philosophy is straightforward: build tools that solve real problems for real people. Every feature ships because it earned its place, not because a checklist demanded it.
+Johnston Software & Services, LLC
+We design, build, and publish software for iPhone, iPad, Apple Watch, and the web.
+Johnston Software & Services, LLC is an independent software company based in Tigard, Oregon, United States. We ship a focused portfolio of privacy-first utility apps for photographers, video producers, amateur radio operators, and distributed teams. Every product listed below is designed, developed, marketed, and supported by this company.
+The landscape photography forecast. Shotcast scores each hour of the forecast against 33 documented photographic "looks," from radiation fog to afterglow to rime ice, so a photographer can decide which mornings are worth the drive. Free, offline-first, and no account required.
+Product site: https://shotcast.photos
+A time zone instrument for people who work across the world. Each place or person gets a lane shaded by real solar math, computed from that location's own coordinates, with working hours, daylight saving warnings, widgets, Lock Screen accessories, an Apple Watch app, and Siri and Shortcuts support. One-time purchase, no subscription, no account, and no server.
+Product site: https://meridiantimezone.com
+An honest storage benchmark for iPhone and iPad. DiskDyno bypasses the read cache on every test, then proves the bypass actually reached the device, and grades each result Verified, Suspect, or with its caveats named. It reports sustained throughput separately from opening burst and checks the measured speed against 120 combinations of codec, resolution, and frame rate. Free to start, with a one-time Pro unlock.
+Product site: https://diskdyno.com
+An HF propagation companion for licensed amateur radio operators. SkyWave recommends a band worth trying right now from your grid square, with a confidence read, an NVIS visualization, saved locations, recommendation history, and a Home Screen widget. Backed by a 21-term propagation knowledge base.
+Product site: https://skywaveradio.app
+About the Company
+We build small, sharply scoped tools and support them directly. Our apps carry no advertising SDKs, no third-party analytics, and no user accounts. Where an app stores data, that data stays on the customer's own device or in their own iCloud account.
+Each product publishes its own privacy policy and terms of use.
+© 2026 Johnston Software & Services, LLC. All rights reserved.
+Johnston Software & Services, LLC is not affiliated with Apple Inc. Apple, iPhone, iPad, Apple Watch, and Mac are trademarks of Apple Inc.
 
 ---
 
@@ -1018,4 +1018,4 @@ Phil spends much of his free time on familial duties, but when downtime allows, 
 ---
 
 Source: https://philjohnstonii.com
-Last updated: 2026-08-05
+Last updated: 2026-08-06

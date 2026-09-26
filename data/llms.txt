@@ -22,6 +22,7 @@
 - [15,000 Developers During a Pandemic: What I Learned at HERE Technologies](https://philjohnstonii.com/blog/iuqdpdkpo11dzgygsoz7j7cbiwq9zx): How Phil Johnston onboarded 15,000 developers at HERE Technologies during the pandemic using digital-first DevRel, then expanded the cloud marketplace by 2,250x as product manager.
 - [How I Help API-First Companies Build Developer Programs That Actually Work](https://philjohnstonii.com/blog/how-i-help-api-first-companies-build-developer-programs-that-actually-work): Phil Johnston is a fractional Head of Developer Relations helping API-first companies build developer programs, partnerships, and AI discoverability. 15 years of experience at GoPro, BMW, HERE Technologies, and 1Password.
 - [“Phil Johnston LinkedIn” (Leaving LinkedIn and Choosing Independence)](https://philjohnstonii.com/blog/phil-johnston-linkedin-leaving-linkedin-and-choosing-independence): After my LinkedIn account was compromised and permanently removed, I lost nearly two decades of professional connections. This is about what happens when a single platform becomes too central to your professional identity.
+- [The Future of Micro-Niche AI Tools](https://philjohnstonii.com/blog/future-of-micro-niche-ai-tools): As someone who’s soon to be less relevant when it comes to technology, I am personally augmenting my workflows to include self-developed tools to help me get my work done.  One recent example is a quick script that will test server
 - [Encouraging Developers to Share Their Stories in Their Own Words](https://philjohnstonii.com/blog/encouraging-developers-to-share-their-stories): One of the most effective DevRel tactics is personally inviting developers to write about their projects in their own words. Here are the strategies and lessons learned from building a developer storytelling program.
 - [Micro-niche vibe coding?](https://philjohnstonii.com/blog/micro-niche-vibe-coding): I've been building small terminal UI apps tuned to very specific personal workflows. It's vibe coding at its most practical: making the tools to be more productive, one micro-niche problem at a time.
 - [Phil Johnston, II](https://philjohnstonii.com/resume): Resume of Phil Johnston, II. 15 years in Developer Relations at BMW, GoPro, HERE Technologies, and 1Password. Built the GoPro Developer Program to 330+ partners including NASA and Google. Onboarded 15,000+ developers. Based in Portland, OR.
@@ -35,4 +36,4 @@
 ## About
 
 Source: https://philjohnstonii.com
-Last updated: 2026-09-25
+Last updated: 2026-09-26

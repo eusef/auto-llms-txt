@@ -684,6 +684,54 @@ The Future of Micro-Niche AI Tools
 
 ---
 
+## The Future of Micro-Niche AI Tools
+
+URL: https://philjohnstonii.com/blog/future-of-micro-niche-ai-tools
+Summary: As someone who’s soon to be less relevant when it comes to technology, I am personally augmenting my workflows to include self-developed tools to help me get my work done.  One recent example is a quick script that will test server
+
+The Future of Micro-Niche AI Tools
+Sandcastles at Cannon Beach, Oregon
+We’re just scratching the surface of what AI can do when it comes to creating personalized, on-demand tools. Today, models can generate one-off scripts for data analysis, or automate a few repetitive tasks. But I see a near future where this idea extends far beyond single-use snippets.
+From Code Generation to Tool Creation
+As someone who’s soon to be less relevant when it comes to technology, I am personally augmenting my workflows to include self-developed tools to help me get my work done.  One recent example is a quick script that will test server latency.  Instead of going out and finding a full-fledged tool on the internet where I may or may not have to sign up for a service, I asked an LLM (Gemini CLI) in this case to create a script that would test Latency.  Within minutes I had a script that would clear caches, wait a random amount of time between requests, measure time and generate a human readable report that could be acted upon immediately.
+Right now, AI creates code when you ask for it. For example:
+A Python script to analyze CSV files.
+A SQL query to answer a data question.
+But the real shift will be when AI begins to generate not just snippets, but entire micro-tools designed around you. These tools will feel more like apps than scripts, and they’ll reflect your personal context.
+Examples Across Domains
+Here’s what I mean by “micro-niche” in practice:
+A script that makes a basic collage
+A personalized Triptych/Diptych creator that adapts to your style and past work
+A script that runs a regression
+A full-fledged analysis dashboard tuned to your knowledge level, guiding tone and language
+A quiz generator
+An adaptive learning path that responds to your mental energy and comprehension in real time
+Many of these tools are one-off, but imagine if these tools entered into a toolbox of on-demand tools that have been curated to your needs, personalized to your level of knowledge and tweaked so that the output that is returned is optimized for your learning style. This is huge for humans and a new form of tool usage.
+How Society Views AI Today
+Public sentiment toward AI is mixed—and trending cautious.
+Concern outweighs excitement : Surveys show 52% of U.S. adults are concerned about AI, while just 10% are excited ( Pew Research ).
+Workplace unease : While 82% of firms are expanding AI use, 70% of employees feel uneasy about AI managers ( Investopedia ). “AI shame” has emerged as people hesitate to use AI tools without formal support ( Times of India ).
+Personalization as the Breakthrough
+The key to adoption and breaking through the societal anxiety around AI is personalization at scale.
+AI won’t just answer your question. It will know how you like answers to be structured.
+It won’t just generate code. It will generate tools that look, feel, and adapt to your workflow.
+It won’t just output text. It will tune tone, depth, and complexity based on your current mental state.
+Think of it like a new layer of software creation: instead of going to an app store, you’ll have tools generated in real time, just for you. Do you really need a wallpaper app, or a fart sound app, or even an app to track your water intake.  The only benefit that I see from most apps these days is that they are in your pocket. What about all your AI scripts in your pocket, collecting relevant information for you and presenting it to you when it makes sense. Personalization and access is key.  We are almost there, but the reality of it is unevenly distributed.
+Or as - William Gibson would say,
+“The future is already here – it's just not evenly distributed.”
+Why This Matters
+Accessibility : People who don’t know data science, design, or code will be able to use professional-grade tools.
+Speed : No more hunting for plugins or software updates. The right tool exists when you need it.
+Creativity : Photographers, writers, and makers will have personalized assistants that know their style history and help push it forward.
+Trust : People will only embrace these tools if they feel safe, human-centered, and under their control.
+Critical thinking : Micro-niche tools should enhance human insight, not replace it.
+Micro-niche AI tools won’t replace human creativity. They’ll act more like invisible co-developers, unlocking human creativity. I have experienced this.  Cool “apps” that are really just features have been kicking around in my mind for years, maybe even decades. Only until recently have they just been ideas, now I can throw an LLM at the idea and have it prototyped and iterated a few times before lunch.
+Instead of a future where everyone uses the same software, I see a future where everyone has their own ideas—built for them in the form of software, by AI, in real time.
+“Phil Johnston LinkedIn” (Leaving LinkedIn and Choosing Independence)
+Encouraging Developers to Share Their Stories in Their Own Words
+
+---
+
 ## Encouraging Developers to Share Their Stories in Their Own Words
 
 URL: https://philjohnstonii.com/blog/encouraging-developers-to-share-their-stories
@@ -970,4 +1018,4 @@ Phil spends much of his free time on familial duties, but when downtime allows, 
 ---
 
 Source: https://philjohnstonii.com
-Last updated: 2026-09-25
+Last updated: 2026-09-26

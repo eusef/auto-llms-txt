@@ -45,6 +45,7 @@ An HF propagation companion for licensed amateur radio operators.
 An HF band conditions companion for amateur radio operators, with band recommendations keyed to your Maidenhead grid square.
 SkyWave recommends a band worth trying right now from your grid square, with a confidence read, an NVIS visualization, saved locations, recommendation history, and a Home Screen widget. Backed by a 21-term propagation knowledge base.
 Learn more › skywaveradio.app ›
+Looking for the browser games, like Thin Air and Road Trip 50? See Games .
 About the Company
 We build small, sharply scoped tools and support them directly. Our apps carry no advertising SDKs, no third-party analytics, and no user accounts. Where an app stores data, that data stays on the customer’s own device or in their own iCloud account.
 Each product publishes its own privacy policy and terms of use.
@@ -1005,12 +1006,92 @@ Summary: How to get in touch with Phil Johnston II.
 
 ---
 
+## Games | Phil Johnston II
+
+URL: https://philjohnstonii.com/games
+Summary: Five browser games by Phil Johnston, II, each on its own subdomain of philjohnstonii.com: Times Table Legends, Thin Air, Road Trip 50, Vortex Run, and Thornvale. They play in the browser and keep working offline.
+
+Multiplication, Morse code, the 50 states, tornado science, and a wild-cat clan saga. Open a game’s link to play it; on iPhone or iPad, add it to your Home Screen for full-screen play.
+Times Table Legends
+Master multiplication from 1x1 to 12x12 in an epic offline adventure.
+Jump straight into play, follow the adventure mode, and check the progress view to see your level as you work through every table from 1 to 12.
+times-table-legends.philjohnstonii.com ›
+A Morse code expedition. Twenty summits, forty characters, learned by ear.
+You learn two characters at a time, by sound, at the speed real radio operators send them, with extra space between characters while you learn. Each summit asks you to copy characters by ear, send them yourself, and complete a few practice radio contacts. Send with an on-screen or physical keyboard, a straight key, or paddles (two common kinds of Morse key). A free-practice mode decodes whatever you send, and a codebook explains on-air shorthand.
+thinair.philjohnstonii.com ›
+Learn every state, capital, and abbreviation.
+A trainer for the 50 US states: where each one is on the map, its capital, and its two-letter abbreviation. Each player drives their own profile, and the whole game runs with no connection.
+roadtrip.philjohnstonii.com ›
+Weather simulator
+A tornado chase simulator, flown from a drone's point of view.
+Set the tornado’s wind speed, size, and path, fly a first-person-view (FPV) drone around it, and drop sensor probes in its path to collect data. Flies with touch, keyboard, or a gamepad, and works offline.
+vortex-run.philjohnstonii.com ›
+Saga of the Wild Clans.
+A 3D open-world wild-cat adventure. Play a young cat of the Pinewatch clan: learn to hunt, mark the borders, fetch healing herbs, drive off raiders, and keep a night vigil to earn your place. Best in landscape on iPad and iPhone, and plays offline.
+thornyvale.philjohnstonii.com ›
+Looking for apps for iPhone, iPad, and the web? See Apps .
+All five games share one privacy policy and one set of terms of use : no accounts, no ads, and progress stays on your device.
+
+---
+
 ## Photography | Phil Johnston II
 
 URL: https://philjohnstonii.com/photography
 Summary: Phil spends much of his free time on familial duties, but when downtime allows, he heads to the Oregon coast to chase unique photos.
 
 Phil spends much of his free time on familial duties, but when downtime allows, he heads to the Oregon coast to chase unique photos. From driftwood to weather, his interest lies in sharing unique perspectives.
+
+---
+
+## Privacy (Games) | Phil Johnston II
+
+URL: https://philjohnstonii.com/privacy-games
+Summary: How the five browser games from Johnston Software & Services LLC (Times Table Legends, Thin Air, Road Trip 50, Vortex Run, and Thornvale) handle information. No accounts, no ads, and nothing you type into a game leaves your device.
+
+This privacy policy describes how Johnston Software & Services LLC (“we,” “us,” or “our”) handles information when you play any of our browser games (each one “a Game,” together “the Games”):
+Times Table Legends (times-table-legends.philjohnstonii.com)
+Thin Air (thinair.philjohnstonii.com)
+Road Trip 50 (roadtrip.philjohnstonii.com)
+Vortex Run (vortex-run.philjohnstonii.com)
+Thornvale (thornyvale.philjohnstonii.com)
+The short version: the Games have no accounts, no ads, and set no cookies. Your progress and anything you type into a Game stay on your device. We use privacy-first analytics that count visits without identifying anyone.
+Information Stored on Your Device
+Each Game saves a small amount of information in your browser’s local storage so you can pick up where you left off. This information stays on your device. The Games do not send it to us or to anyone else.
+Every Game also remembers whether its “For parents” support tab is open or closed.
+Each Game also uses a service worker (a standard browser feature) to keep a copy of the Game’s own files on your device, so it can load and play without an internet connection. That copy contains only the Game itself, not information about you.
+Thin Air reads keyboard and Morse key input, and Vortex Run reads touch, keyboard, and gamepad input. That input is used only inside the Game while you play.
+Information Collected Automatically
+The Games use Cloudflare Web Analytics to count visits and measure how fast the pages load. According to Cloudflare, it:
+Does not use cookies, local storage, or any other storage in your browser
+Does not “fingerprint” visitors for analytics, meaning it does not try to recognize a person from their IP address, browser details, or other data
+Does not track individual visitors across websites
+Collects page load timing, the page address, the referring page, browser, operating system, device type (such as phone or desktop), and country
+Receives your IP address as part of any web request, then discards it at the nearest Cloudflare data center and does not store it in its core databases or logs
+Analytics run only on the hosted Games at the addresses above. For details, see Cloudflare’s Web Analytics documentation , its description of the analytics script , and Cloudflare’s Privacy Policy .
+The Games are hosted by Cloudflare. Like any web host, Cloudflare receives standard information with each request your browser makes, such as your IP address and browser type, in order to deliver the page and protect the service. Cloudflare handles that information under its Privacy Policy .
+Information We Do Not Collect
+We do not create user accounts or require a login.
+We do not collect names, email addresses, phone numbers, or payment information.
+We do not use your location, microphone, camera, or contacts.
+We do not show ads, and we do not use advertising or tracking cookies.
+We do not sell, rent, or share personal information with anyone.
+Support Link (Ko-fi)
+Each Game’s opening screen has a “For parents” tab with a link to our page on Ko-fi , where grown-ups can choose to support the Games. It is a plain link: no Ko-fi code runs inside the Games, and nothing is sent to Ko-fi unless you follow the link. If you do, Ko-fi’s own privacy policy applies to anything you do there.
+Children’s Privacy
+The Games are made for players of all ages, including children. They are built so that no personal information from a child, or anyone else, is collected by us:
+There are no accounts, chat, or ways to contact other players.
+Names and callsigns typed into a Game stay in that browser on that device.
+The analytics described above do not identify players.
+Parents and guardians can see and remove everything a Game has saved by clearing that site’s data in the browser (see Your Choices ). If you believe we have received personal information from a child, contact us and we will delete it.
+Choose what name to type. The callsign in Thin Air is optional, and Thornvale starts with a ready-made name. Road Trip 50 asks for a name for each player, but it can be a nickname or initials.
+Reset a Game. Some Games offer a reset or remove-player option in their settings.
+Delete everything. Clear the browsing data for the Game’s address in your browser’s settings, or delete the Game from your Home Screen if you added it there. This removes all saved progress, names, settings, and the offline copy.
+Block analytics. Content blockers that block cloudflareinsights.com stop the analytics without affecting play.
+Changes to This Policy
+We may update this privacy policy from time to time. Changes will be posted on this page with an updated effective date.
+If you have questions about this privacy policy, contact us at:
+Johnston Software & Services LLC PO Box 230614 Tigard, OR 97281
+Or visit: philjohnstonii.com/contact
 
 ---
 
@@ -1152,6 +1233,47 @@ Privacy policy · Terms of service
 
 ---
 
+## Terms (Games) | Phil Johnston II
+
+URL: https://philjohnstonii.com/terms-games
+Summary: Terms of use for the five free browser games from Johnston Software & Services LLC: Times Table Legends, Thin Air, Road Trip 50, Vortex Run, and Thornvale.
+
+These terms of use (“Terms”) cover the browser games provided by Johnston Software & Services LLC (“we,” “us,” or “our”): Times Table Legends , Thin Air , Road Trip 50 , Vortex Run , and Thornvale (each one “a Game,” together “the Games”). By playing a Game, you agree to these Terms. If a child is playing, a parent or guardian agrees to these Terms on their behalf.
+Using the Games
+The Games are free to play in a web browser, online or offline. They are made for learning and fun. You may play them for personal, non-commercial use, including at home and in classrooms.
+You agree not to:
+Copy, sell, or republish a Game, or present it as your own
+Interfere with or try to disrupt the sites that host the Games
+Use a Game for anything unlawful
+Support Through Ko-fi
+Each Game has a “For parents” tab that links to our page on Ko-fi . Support is voluntary. It does not unlock features, and every part of every Game stays free whether or not you contribute. Any payment you make happens on Ko-fi under Ko-fi’s terms, not ours.
+Accuracy and Disclaimers
+We work to keep the Games accurate, but they are games, and they may contain mistakes.
+Learning content. Facts in the Games (multiplication tables, state capitals and abbreviations, Morse code, and weather science) may contain errors. Check anything important against a trusted source.
+Vortex Run is a simulation. Its tornadoes are simplified models for play and learning. It is not storm-safety guidance. In real severe weather, follow your local weather service and emergency officials, and never approach a tornado.
+Thin Air is practice. Learning Morse code in the Game does not license you to transmit on the radio. Transmitting on amateur radio frequencies requires a license from your country’s radio authority.
+Saved progress. Progress is stored only in your browser. Clearing browser data, changing devices, or a browser update can erase it, and we cannot restore it.
+THE GAMES ARE PROVIDED “AS IS” AND “AS AVAILABLE” WITHOUT WARRANTIES OF ANY KIND, EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE, OR NON-INFRINGEMENT.
+Intellectual Property
+The Games, including their design, code, artwork, sound, and text, are the property of Johnston Software & Services LLC. Playing a Game does not give you ownership of any part of it. You may share links to the Games freely.
+Limitation of Liability
+To the maximum extent permitted by law, Johnston Software & Services LLC shall not be liable for any indirect, incidental, special, consequential, or punitive damages arising from your use of the Games, including but not limited to:
+Loss of saved progress or settings
+Interruption or unavailability of a Game
+Any action taken based on information in a Game
+Because the Games are free, our total liability for any claim arising from their use shall not exceed fifty US dollars (US$50).
+Changes and Discontinuation
+We may change, update, or stop offering any Game at any time. A copy you saved for offline play may keep working after we stop hosting it, but it will not receive updates.
+Our Games Privacy Policy explains what information the Games handle. In short: no accounts, no ads, and what you type into a Game stays on your device.
+Changes to These Terms
+We may update these Terms from time to time. Changes will be posted on this page with an updated effective date. Continued use of the Games after changes constitutes acceptance of the updated Terms.
+These Terms are governed by the laws of the State of Oregon, United States, without regard to conflict of law provisions.
+If you have questions about these Terms, contact us at:
+Johnston Software & Services LLC PO Box 230614 Tigard, OR 97281
+Or visit: philjohnstonii.com/contact
+
+---
+
 ## Terms (Skywave) | Phil Johnston II
 
 URL: https://philjohnstonii.com/terms-skywave
@@ -1192,4 +1314,4 @@ Or visit: philjohnstonii.com/contact
 ---
 
 Source: https://philjohnstonii.com
-Last updated: 2026-11-24
+Last updated: 2026-11-25

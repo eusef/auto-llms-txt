@@ -33,13 +33,16 @@
 - [Your Developer Tool Is Invisible to AI. That’s a Problem. | Phil Johnston II](https://philjohnstonii.com/blog/your-developer-tool-is-invisible-to-ai-thats-a-problem): AI tools are reshaping how developers discover and evaluate APIs and SDKs. Learn what makes a developer tool visible to LLMs, why most companies are behind, and tactical steps to fix it including llms.txt, JSON-LD, MCP servers, and content strategy.
 - [Consulting | Phil Johnston II](https://philjohnstonii.com/consulting): Fractional DevRel consulting for API-first companies. Services include Fractional Head of DevRel ($5,000/mo), DevRel Program Audit ($2,500), and AI DevRel Accelerator ($3,500-4,000). Track record with GoPro, HERE Technologies, and 1Password.
 - [Contact | Phil Johnston II](https://philjohnstonii.com/contact): How to get in touch with Phil Johnston II.
+- [Games | Phil Johnston II](https://philjohnstonii.com/games): Five browser games by Phil Johnston, II, each on its own subdomain of philjohnstonii.com: Times Table Legends, Thin Air, Road Trip 50, Vortex Run, and Thornvale. They play in the browser and keep working offline.
 - [Photography | Phil Johnston II](https://philjohnstonii.com/photography): Phil spends much of his free time on familial duties, but when downtime allows, he heads to the Oregon coast to chase unique photos.
+- [Privacy (Games) | Phil Johnston II](https://philjohnstonii.com/privacy-games): How the five browser games from Johnston Software & Services LLC (Times Table Legends, Thin Air, Road Trip 50, Vortex Run, and Thornvale) handle information. No accounts, no ads, and nothing you type into a game leaves your device.
 - [Privacy (Skywave) | Phil Johnston II](https://philjohnstonii.com/privacy-skywave): This privacy policy describes how Johnston Software & Services LLC ("we," "us," or "our") collects, uses, and protects information when you use the SkyWave mobile application ("the App").
 - [Resume | Phil Johnston II](https://philjohnstonii.com/resume): Resume of Phil Johnston, II. 15 years in Developer Relations at BMW, GoPro, HERE Technologies, and 1Password. Built the GoPro Developer Program to 330+ partners including NASA and Google. Onboarded 15,000+ developers. Based in Portland, OR.
 - [Skywave | Phil Johnston II](https://philjohnstonii.com/skywave): Getting your ham radio license is the hard part. Knowing which band to use right now shouldn't be.
+- [Terms (Games) | Phil Johnston II](https://philjohnstonii.com/terms-games): Terms of use for the five free browser games from Johnston Software & Services LLC: Times Table Legends, Thin Air, Road Trip 50, Vortex Run, and Thornvale.
 - [Terms (Skywave) | Phil Johnston II](https://philjohnstonii.com/terms-skywave): These terms of service ("Terms") govern your use of the SkyWave mobile application ("the App") provided by Johnston Software & Services LLC ("we," "us," or "our").
 
 ## About
 
 Source: https://philjohnstonii.com
-Last updated: 2026-11-24
+Last updated: 2026-11-25
